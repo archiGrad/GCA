@@ -1,0 +1,17 @@
+Name: Arno De Lathauwer (q1540183)
+Assignment: Project report hand-in
+Date Submitted: Thursday, 15 May 2025 01:06:53 o'clock CEST
+Current Mark: Needs Marking
+
+Submission Field:
+<br>
+<p><a href="@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/internal/courses/ULTRA-B-KUL-JLI1QS-2425/gradebook/submission/attempt/4/1/2/_4334412_1/embedded/Arno_De_Lathauwer_Indra_Coppens_Geavanceerde_Computerarchitectuur_Project.pdf" data-bbtype="attachment" data-bbfile="{&quot;alternativeText&quot;:&quot;Arno_De_Lathauwer_Indra_Coppens_Geavanceerde_Computerarchitectuur_Project.pdf&quot;,&quot;displayName&quot;:&quot;Arno_De_Lathauwer_Indra_Coppens_Geavanceerde_Computerarchitectuur_Project.pdf&quot;,&quot;fileName&quot;:&quot;Arno_De_Lathauwer_Indra_Coppens_Geavanceerde_Computerarchitectuur_Project.pdf&quot;,&quot;fileSize&quot;:1051322,&quot;mimeType&quot;:&quot;application/pdf&quot;,&quot;render&quot;:&quot;inline&quot;,&quot;resourceUrl&quot;:&quot;@X@EmbeddedFile.requestUrlStub@X@sessions/77/77D10724F154AFF0D7FE3D739305BDEE/d11c7a3938ef48a4b4976ceb4782dfc5/Arno_De_Lathauwer_Indra_Coppens_Geavanceerde_Computerarchitectuur_Project.pdf&quot;,&quot;linkName&quot;:&quot;Arno_De_Lathauwer_Indra_Coppens_Geavanceerde_Computerarchitectuur_Project.pdf&quot;,&quot;viewerUuid&quot;:&quot;--bav--d862fe52-26f4-4a6d-8a0e-fe01da83f28a&quot;,&quot;bbFileUuid&quot;:&quot;e23e2707dd0342688b54e22a7f3a7acd&quot;}">Arno_De_Lathauwer_Indra_Coppens_Geavanceerde_Computerarchitectuur_Project.pdf</a></p>
+<br>
+
+Comments:
+There are no student comments for this assignment.
+
+Files:
+	Original filename: Arno_De_Lathauwer_Indra_Coppens_Geavanceerde_Computerarchitectuur_Project.pdf
+	Filename: Project report hand-in_q1540183_attempt_2025-05-15-01-06-53_Arno_De_Lathauwer_Indra_Coppens_Geavanceerde_Computerarchitectuur_Project.pdf
+

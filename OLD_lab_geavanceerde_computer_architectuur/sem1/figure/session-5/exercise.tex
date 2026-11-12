@@ -1,0 +1,72 @@
+
+
+\begin{tikzpicture}[]
+
+
+\def\lineHeight{0.5}
+\def\xOne{0}
+\def\xTwo{8}
+
+
+%%% GRID %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\node[anchor=south] at (\xOne, 0) {Sync};
+\node[anchor=south] at (\xTwo, 0) {Aync};
+
+
+%%% Synchronous
+
+\draw[blue, ultra thick] (\xOne, 0) --++(0, -\lineHeight);
+\draw[blue, ultra thick, dotted] (\xOne, -\lineHeight) --++(0, -\lineHeight);
+
+\draw[red, ultra thick] (\xOne, -2*\lineHeight) --++(0, -\lineHeight);
+\draw[red, ultra thick, dotted] (\xOne, -3*\lineHeight) --++(0, -\lineHeight);
+
+\draw[cyan, ultra thick] (\xOne, -4*\lineHeight) --++(0, -\lineHeight);
+\draw[cyan, ultra thick, dotted] (\xOne, -5*\lineHeight) --++(0, -\lineHeight);
+
+\draw[magenta, ultra thick] (\xOne, -6*\lineHeight) --++(0, -\lineHeight);
+\draw[magenta, ultra thick, dotted] (\xOne, -7*\lineHeight) --++(0, -\lineHeight);
+
+
+%%% Asynchronous
+
+\draw[blue, ultra thick] (\xTwo, 0) --++(0, -\lineHeight);
+\draw[blue, ultra thick, dotted] (\xTwo+0.2, -\lineHeight) --++(0, -\lineHeight);
+
+\draw[red, ultra thick] (\xTwo, -\lineHeight) --++(0, -\lineHeight);
+\draw[red, ultra thick, dotted] (\xTwo+0.2, -2*\lineHeight) --++(0, -\lineHeight);
+
+\draw[cyan, ultra thick] (\xTwo, -2*\lineHeight) --++(0, -\lineHeight);
+\draw[cyan, ultra thick, dotted] (\xTwo+0.2, -3*\lineHeight) --++(0, -\lineHeight);
+
+\draw[magenta, ultra thick] (\xTwo, -3*\lineHeight) --++(0, -\lineHeight);
+\draw[magenta, ultra thick, dotted] (\xTwo, -4*\lineHeight) --++(0, -\lineHeight);
+
+
+%%% Annotations
+
+
+\node[blue, anchor=east, align=right, font=\footnotesize] at (\xOne-0.2, -0.5*\lineHeight) {Prepare array for sum};
+\node[blue, anchor=east, align=right, font=\footnotesize] at (\xOne-0.2, -1.5*\lineHeight) {Execute sum and get result};
+
+\node[red, anchor=east, align=right, font=\footnotesize] at (\xOne-0.2, -2.5*\lineHeight) {Prepare array for prod};
+\node[red, anchor=east, align=right, font=\footnotesize] at (\xOne-0.2, -3.5*\lineHeight) {Execute prod and get result};
+
+\node[cyan, anchor=east, align=right, font=\footnotesize] at (\xOne-0.2, -4.5*\lineHeight) {Prepare array for min};
+\node[cyan, anchor=east, align=right, font=\footnotesize] at (\xOne-0.2, -5.5*\lineHeight) {Execute min and get result};
+
+\node[magenta, anchor=east, align=right, font=\footnotesize] at (\xOne-0.2, -6.5*\lineHeight) {Prepare array for max};
+\node[magenta, anchor=east, align=right, font=\footnotesize] at (\xOne-0.2, -7.5*\lineHeight) {Execute max and get result};
+
+
+
+\draw[-{angle 60}] 
+(\xOne+0.5, -3*\lineHeight) -- 
+(\xTwo-0.5, -3*\lineHeight)
+node[midway, above] {CPU and GPU run in parallel}
+node[midway, below] {Less blocking (waiting)};
+
+
+
+\end{tikzpicture}

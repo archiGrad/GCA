@@ -1,0 +1,11 @@
+\frametitle{Cuda view vs. physical view}
+\begin{itemize}
+        \item Cuda view: Grid, blocks, threads
+    \end{itemize}
+    \centering
+    \begin{center}
+        \resizebox{0.8\columnwidth}{!}{\input{figure/session-1/cuda_view_grid.tex}}
+    \end{center}
+    \begin{lstlisting}[language=C++]
+        foo<<<8, 4>>>(input_data, output_data)
+    \end{lstlisting}

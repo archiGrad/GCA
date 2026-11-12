@@ -1,0 +1,22 @@
+\frametitle{Thread divergence within a warp}
+
+    \begin{itemize}\setlength\itemsep{0.5em}
+        \item Part of the warp has higher complexity, taking longer to execute.
+        \item The other part of the warp becomes idle (has finished its job).
+        \item Idle threads occupy cores and do not contribute to the processing of data.
+    \end{itemize}
+
+\vspace{2mm}
+
+\begin{lstlisting}[language=C++]
+__global__ void addOrMultiply(int *a, int *b, int *c) {
+    int tid = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (tid % 2 == 0) {     // If tid is even, add elements
+        c[tid] = a[tid] + b[tid];
+    } else {                // If tid is odd, multiply elements
+        c[tid] = a[tid] * b[tid];
+    }
+}
+\end{lstlisting}
+

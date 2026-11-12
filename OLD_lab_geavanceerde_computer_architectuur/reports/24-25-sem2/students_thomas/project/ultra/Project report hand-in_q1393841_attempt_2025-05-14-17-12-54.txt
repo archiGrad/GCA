@@ -1,0 +1,16 @@
+Name: Robbe Hovaert (q1393841)
+Assignment: Project report hand-in
+Date Submitted: Wednesday, 14 May 2025 17:12:54 o'clock CEST
+Current Mark: Needs Marking
+
+Submission Field:
+<p>Robbe en Lukas</p>
+<p><a href="@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/internal/courses/ULTRA-B-KUL-JLI1QS-2425/gradebook/submission/attempt/2/2/1/_4329221_1/embedded/Lukas%20Robbe%20Project%20Geavanceerde%20Computerachitectuur.pdf" data-bbtype="attachment" data-bbfile="{&quot;alternativeText&quot;:&quot;Lukas Robbe Project Geavanceerde Computerachitectuur.pdf&quot;,&quot;displayName&quot;:&quot;Lukas Robbe Project Geavanceerde Computerachitectuur.pdf&quot;,&quot;fileName&quot;:&quot;Lukas Robbe Project Geavanceerde Computerachitectuur.pdf&quot;,&quot;fileSize&quot;:1382813,&quot;mimeType&quot;:&quot;application/pdf&quot;,&quot;render&quot;:&quot;inline&quot;,&quot;resourceUrl&quot;:&quot;@X@EmbeddedFile.requestUrlStub@X@sessions/5A/5A665347C6B0A1F46C8C053DF0D90384/db155ae8fa784c1d879c3f44c588ecd6/Lukas%20Robbe%20Project%20Geavanceerde%20Computerachitectuur.pdf&quot;,&quot;linkName&quot;:&quot;Lukas Robbe Project Geavanceerde Computerachitectuur.pdf&quot;,&quot;viewerUuid&quot;:&quot;--bav--eaf1a793-10ad-4cad-9ca5-94da75372d18&quot;,&quot;bbFileUuid&quot;:&quot;3dd52b87acd94513bdf7399991abf6c1&quot;}">Lukas Robbe Project Geavanceerde Computerachitectuur.pdf</a></p>
+
+Comments:
+There are no student comments for this assignment.
+
+Files:
+	Original filename: Lukas Robbe Project Geavanceerde Computerachitectuur.pdf
+	Filename: Project report hand-in_q1393841_attempt_2025-05-14-17-12-54_Lukas Robbe Project Geavanceerde Computerachitectuur.pdf
+

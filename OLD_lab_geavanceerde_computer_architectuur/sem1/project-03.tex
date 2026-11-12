@@ -1,0 +1,123 @@
+% kuleuventheme2 by Janez Kren, September 2017, janez.kren@kuleuven.be, based on:
+% kuleuventheme 1.3 by Roland Pastorino, 2013 roland.pastorino@kuleuven.be / www.rolandpastorino.com
+
+\PassOptionsToPackage{usenames, table, dvipsnames}{xcolor} % 
+\documentclass[11pt,t]{beamer}
+\usetheme{kuleuven2}	%THEME OPTIONS for LOGO: kul (default), kulak, lrd,    ; OPTIONS for TITLE PAGE: normal (default), sedes
+
+
+%%% OTHER SETTINGS
+\usefonttheme[onlymath]{serif}			% math font with serifs, delete to make it sans-serif
+\setbeamertemplate{footline}[body] 		% delete this line to remove footline bar on all frames
+%\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter} %enable for widescreen 16:9 ratio
+%\titlegraphic{ \includegraphics[width=.2\paperwidth]{mytitlepagepic.png} } %optional title page image
+
+
+%%% ADDED BY ALEX (start)
+\usepackage[english]{babel}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{pythonhighlight}
+
+\usepackage[orientation=landscape,size=custom, width=16,height=9,scale=0.5,debug]{beamerposter} 
+
+\definecolor{mygray}{rgb}{0.8,0.8,0.8}
+\newcommand{\inline}[1]{ \colorbox{mygray}{\lstinline{#1}}}
+
+\usepackage{xcolor}
+
+\usepackage{layouts} % To get text/page width
+
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+% \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{backcolour}{rgb}{0.93,0.93,0.95}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+%%% ADDED BY ALEX (stop)
+
+
+%%% TITLE PAGE INFO:
+\title[Geavanceerde Computerarchitectuur Project -- lab session 5 of 6 (11 of 12)]{Geavanceerde Computerarchitectuur Project} %[]] will appear in footline
+\subtitle{Update lab session 5 of 6 (11 of 12)}
+
+\author{Alex Marinsek, {\footnotesize alexander.marinsek@kueluven.be}}
+\institute{DRAMCO -- WaveCore -- ESAT}
+\date{Academic year 2023/24}
+
+
+
+
+\begin{document}
+\csname beamer@calculateheadfoot\endcsname %recalculate head and foot dimension
+
+
+ %%
+ %%  0. TITLE PAGE and TABLE OF CONTENT
+ %%
+% Title page
+\begin{frame}[plain,noframenumbering]
+	\titlepage
+\end{frame}
+	
+
+
+\begin{frame}{Update}
+
+\vspace{-2mm}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \draw[black, thin, ->] (2, 0) -- (13.6, 0);
+        \draw[Plum, ultra thick] (2.2, 0) -- (11., 0);
+        \draw[olive, ultra thick] (2.2, 0) -- (8.8, 0);
+        % \node[blue, anchor=south] at (4.4, 0.2) {now};
+        \foreach \i in {1, 2, ..., 6} {
+            \node[black, anchor=north, font=\small] at (\i*2.2, -0.2) {Session \i};
+            \draw[black] (\i*2.2, -0.1) --++(0, 0.2);
+        }
+        \node[black, anchor=north, font=\small] at (2.2, -0.7) {Proj. start};
+        \node[black, anchor=north, font=\small] at (13.2, -0.7) {Presentations};
+    \end{tikzpicture}
+\end{figure}
+
+\vspace{2mm}
+
+The important dates for {\color{olive}Monday's} and {\color{Plum}Friday's} group are:
+\vspace{2mm}
+\begin{itemize}\setlength\itemsep{0.75em}
+    \item Project start -- {\color{olive}25/03} and {\color{Plum}29/03}
+    \item Hand in the reports -- {\color{olive}09/05} and {\color{Plum}15/05}
+    \item Presentations and finish -- {\color{olive}13/05} and {\color{Plum}17/05}
+\end{itemize}
+
+\vspace{2mm}
+
+{\color{olive} Can we move 13/05 to $\pm$ 12:00?}
+
+\end{frame}
+
+
+\end{document}

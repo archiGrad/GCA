@@ -1,0 +1,17 @@
+Name: Christoph Sanders (q1504736)
+Assignment: Project report hand-in
+Date Submitted: Tuesday, 13 May 2025 21:20:47 o'clock CEST
+Current Mark: Needs Marking
+
+Submission Field:
+<br>
+<p><a href="@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/internal/courses/ULTRA-B-KUL-JLI1QS-2425/gradebook/submission/attempt/4/7/5/_4319475_1/embedded/GC_project_Wout_Corijn_Christoph_Sanders.pdf" data-bbtype="attachment" data-bbfile="{&quot;alternativeText&quot;:&quot;GC_project_Wout_Corijn_Christoph_Sanders.pdf&quot;,&quot;displayName&quot;:&quot;GC_project_Wout_Corijn_Christoph_Sanders.pdf&quot;,&quot;fileName&quot;:&quot;GC_project_Wout_Corijn_Christoph_Sanders.pdf&quot;,&quot;fileSize&quot;:708056,&quot;mimeType&quot;:&quot;application/pdf&quot;,&quot;render&quot;:&quot;inline&quot;,&quot;resourceUrl&quot;:&quot;@X@EmbeddedFile.requestUrlStub@X@sessions/61/619789BBE37DDCC86EEC629F545691ED/5b1c300144fa476f82926868ca5fa710/GC_project_Wout_Corijn_Christoph_Sanders.pdf&quot;,&quot;linkName&quot;:&quot;GC_project_Wout_Corijn_Christoph_Sanders.pdf&quot;,&quot;viewerUuid&quot;:&quot;--bav--144ce93d-3eb5-4c2f-be98-00178c72ac9a&quot;,&quot;bbFileUuid&quot;:&quot;0ce6c2b5c52d4807a8a85bf42ebade09&quot;}">GC_project_Wout_Corijn_Christoph_Sanders.pdf</a></p>
+<br>
+
+Comments:
+There are no student comments for this assignment.
+
+Files:
+	Original filename: GC_project_Wout_Corijn_Christoph_Sanders.pdf
+	Filename: Project report hand-in_q1504736_attempt_2025-05-13-21-20-47_GC_project_Wout_Corijn_Christoph_Sanders.pdf
+

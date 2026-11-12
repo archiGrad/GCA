@@ -1,0 +1,35 @@
+
+\begin{tikzpicture}[]
+
+\node[align=center] (yc) at (-6, 0) {Your code\\(C++)};
+
+\node[align=center] (ide) at (-2, 0) {IDE\\(VSC)};
+\draw[black] (ide.south west) rectangle (ide.north east);
+\node[align=center] (inst) at (-2, 2) {Instructions\\(tasks.json)};
+\node[align=center] (comp) at (-2, -2) {Compiler\\(nvcc))};
+\draw[black] (comp.south west) rectangle (comp.north east);
+
+\node[align=center] (cpu) at ( 2, 0) {CPU};
+\draw[black] (cpu.south west) rectangle (cpu.north east);
+\node[align=center] (gpu) at ( 2, -2) {GPU};
+\draw[black] (gpu.south west) rectangle (gpu.north east);
+
+\node[align=center] (term) at ( 6, 2) {Terminal (printf)};
+\node[align=center] (dump) at ( 6, 0) {Dump (file)};
+\node[align=center] (vir) at ( 6, -2) {Virus (\dots)};
+
+
+\draw[-{angle 60}] (yc.east) -- (ide.west);
+
+\draw[] (comp.north) -- (ide.south);
+\draw[-{angle 60}] (inst.south) -- (ide.north) ;
+\draw[-{angle 60}] (ide.east) -- (cpu.west);
+
+
+\draw[-{angle 60}] (gpu.north) -- (cpu.south);
+\draw[-{angle 60}] (cpu.east) -- (term.west);
+\draw[-{angle 60}] (cpu.east) -- (dump);
+\draw[-{angle 60}] (cpu.east) -- (vir.west);
+
+
+\end{tikzpicture}

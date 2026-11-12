@@ -1,0 +1,45 @@
+- The desktops in the lab with a grey/silver front have a GPU in them.
+  => GPU type: NVIDIA GeForce GT 730 
+  => compute capability: 3.5
+  => 1024 Mbytes memory
+  => 2 SMs!
+  => 192 cores per SM 384 cores total!
+(https://www.geeks3d.com/20140618/nvidia-geforce-gt-730-launched/)
+
+- Students need to boot in linux (not windows)
+- login: student
+- pasword: student00 (00 should be replaced by the pc number)
+- admin pasword in case something needs to be changed => ask Thomas Feys (or Geoff)
+
+How to run cuda code in vscode:
+- there is a tasks.json on toledo
+- students need to put this in the .vscode folder
+- in task.json they need to change the source file to current working file! 
+	=> "args": ["-g", "-o", "maintest.exe", "${workspaceFolder}/hello_world.cu"],
+- Terminal > Run Build Task > Build
+
+---------2025------------
+windows login: kuleuven login (unr@kuleuven.be)
+linux login: student, student
+admin password: geen hoofdletter, geen cijfers
+
+GPU: nvidia T400 4GB 
+=> Turing architecture 
+=> 4 GB GPU Memory
+=> 6 SMs
+=> 64 cuda cores/SM
+=> 384 total cores
+=> compute capability: 7.5
+
+todo for students:
+su b230admin 
+=> call me to enter the password
+sudo apt update -y
+sudo snap install --classic code
+sudo apt install nvidia-cuda-toolkit
+nvcc --version
+
+run test.cu: (compile & run)
+nvcc test.ce -o test
+./test
+

@@ -1,0 +1,39 @@
+https://blog.42yeah.is/cuda/2023/06/03/cuda.html
+
+cuda in VScode:
+https://docs.nvidia.com/nsight-visual-studio-code-edition/cuda-debugger/index.html
+
+Setting up C++ in VScode:
+https://code.visualstudio.com/docs/cpp/config-msvc#_prerequisites (windows)
+
+cuda from command line:
+https://forums.developer.nvidia.com/t/the-simplest-way-to-compile-a-cu-file-looking-for-hello-world-example-for-compilation/21151
+
+
+nvcc fatal   : Cannot find compiler 'cl.exe' in PATH
+https://stackoverflow.com/questions/8125826/error-compiling-cuda-from-command-prompt
+cl.exe path: https://stackoverflow.com/questions/70840683/installed-visual-studio-2022-but-cl-is-not-recognized-as-an-internal-or-extern
+
+
+
+installing make:
+https://answers.microsoft.com/en-us/windows/forum/all/powershell-terminal-in-vs-code-make-the-term-make/74d69621-c91e-4929-83c2-2252f0371397
+
+
+---------------------- current setup -----------------------------------------------------------------------
+1) install visual studio + c++ development
+2) install cuda
+
+VSCode launch, task and c_cpp_properties.json files:
+https://ericzhng.github.io/psn-blogs/blog/vs-code-cuda/
+
+Errors: 
+- nvcc fatal   : Cannot find compiler 'cl.exe' in PATH
+fix: add cl.exe to path: https://stackoverflow.com/questions/8125826/error-compiling-cuda-from-command-prompt
+usual path (VS2019): C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64
+
+RUNNING THE PROGRAM: 
+- in task.json change source file to current working file! => "args": ["-g", "-o", "maintest.exe", "${workspaceFolder}/hello_world.cu"],
+- Terminal>Run Build Task>Build
+
+

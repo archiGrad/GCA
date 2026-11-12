@@ -1,0 +1,427 @@
+% kuleuventheme2 by Janez Kren, September 2017, janez.kren@kuleuven.be, based on:
+% kuleuventheme 1.3 by Roland Pastorino, 2013 roland.pastorino@kuleuven.be / www.rolandpastorino.com
+
+\PassOptionsToPackage{usenames, table, dvipsnames}{xcolor} % 
+\documentclass[11pt,t]{beamer}
+\usetheme{kuleuven2}	%THEME OPTIONS for LOGO: kul (default), kulak, lrd,    ; OPTIONS for TITLE PAGE: normal (default), sedes
+
+
+%%% OTHER SETTINGS
+\usefonttheme[onlymath]{serif}			% math font with serifs, delete to make it sans-serif
+\setbeamertemplate{footline}[body] 		% delete this line to remove footline bar on all frames
+%\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter} %enable for widescreen 16:9 ratio
+%\titlegraphic{ \includegraphics[width=.2\paperwidth]{mytitlepagepic.png} } %optional title page image
+
+
+\usepackage[english]{babel}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{pythonhighlight}
+
+\usepackage[orientation=landscape,size=custom, width=16,height=9,scale=0.5,debug]{beamerposter} 
+
+\definecolor{mygray}{rgb}{0.8,0.8,0.8}
+\newcommand{\inline}[1]{ \colorbox{mygray}{\lstinline{#1}}}
+
+\usepackage{xcolor}
+
+\usepackage{layouts} % To get text/page width
+
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+% \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{backcolour}{rgb}{0.93,0.93,0.95}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+%%% ADDED BY ALEX (stop)
+
+
+%%% TITLE PAGE INFO:
+\title[Geavanceerde Computerarchitectuur 1$^{\text{st}}$ session]{Geavanceerde Computerarchitectuur 1$^{\text{st}}$ session} %[]] will appear in footline
+\subtitle{GPGPU programming, course info, exercise description}
+
+\author{Joris Putteneers, {\footnotesize joris.putteneers@kueluven.be}}
+\institute{DRAMCO}
+\date{Academic year 2026/27}
+
+
+
+
+\begin{document}
+\csname beamer@calculateheadfoot\endcsname %recalculate head and foot dimension
+
+
+ %%
+ %%  0. TITLE PAGE and TABLE OF CONTENT
+ %%
+% Title page
+\begin{frame}[plain,noframenumbering]
+	\titlepage
+\end{frame}
+	
+
+% Table of Contents
+\begin{frame}{Outline}
+	\hfill	{\large \parbox{.961\textwidth}{\tableofcontents[hideothersubsections]}}
+\end{frame}
+
+
+
+
+
+
+
+%%
+%%  SECTION 1 - INFO
+%%
+\section{Course intro and info}
+
+
+
+\begin{frame}{GPUs can execute more threads simultaneously} 
+    \begin{figure}[t]
+        \centering
+        \begin{center}               
+            \resizebox{0.98\columnwidth}{!}{\input{figure/session-1/thread_pool}}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Example: parallel processing for ray tracing} 
+    \vspace{-.5 em}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\columnwidth]{figure/session-1/ray-tracer.jpeg}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Relationship between architecture and scope} 
+    \begin{figure}[t]
+        \centering
+        \begin{center}               
+            \resizebox{0.98\columnwidth}{!}{\input{figure/session-1/architecture_and_scope}}
+        \end{center}
+    \end{figure}
+% textwidth in cm: \printinunitsof{cm}\prntlen{\textwidth}
+\end{frame}
+
+
+
+\begin{frame}{CUDA, an API for programming Nvidia GPUs}
+    \begin{figure}
+        \centering
+        \includegraphics[width=7cm]{figure/session-1/gpu-computing-applications.png}
+    \end{figure}	
+\end{frame}
+
+
+
+\begin{frame}{Environment and workflow} 
+    \begin{figure}[t]
+        \centering
+        \begin{center}               
+            \resizebox{0.98\columnwidth}{!}{\input{figure/session-1/environment_and_wokflow}}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Organization of the lab and docs} 
+    \begin{figure}[t]
+        \centering
+        \begin{center}               
+            \resizebox{0.98\columnwidth}{!}{\input{figure/session-1/organization}}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Responsibilities and evaluation} 
+    \begin{figure}[t]
+        \centering
+        \begin{center}               
+            \resizebox{0.98\columnwidth}{!}{\input{figure/session-1/responsibilities}}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Recap} 
+
+    \vspace{-0.5cm}
+
+    \begin{columns}[t] % align columns at the top
+    \column{0.5\textwidth} % first column
+    \begin{figure}
+    \centering
+    \resizebox{0.95\columnwidth}{!}{\input{figure/session-1/architecture_and_scope_no_anim}}
+    \end{figure}
+    
+    \column{0.5\textwidth} % second column
+    \begin{figure}
+    \centering
+    \resizebox{0.95\columnwidth}{!}{\input{figure/session-1/environment_and_wokflow}}
+    \end{figure}
+    \end{columns}
+    
+    \begin{columns}[t] % align columns at the top
+    \column{0.5\textwidth} % first column
+    \begin{figure}
+    \centering
+    \resizebox{0.95\columnwidth}{!}{\input{figure/session-1/organization}}
+    \end{figure}
+    
+    \column{0.5\textwidth} % second column
+    \begin{figure}
+    \centering
+    \resizebox{0.95\columnwidth}{!}{\input{figure/session-1/responsibilities}}
+    \end{figure}
+    \end{columns}
+
+\end{frame}
+
+
+
+\section{A grid of threads}
+
+\begin{frame}{Threads are organized into a grid} 
+
+    \begin{figure}[t]
+        \centering
+        \begin{center}               
+            \resizebox{0.98\columnwidth}{!}{\input{figure/session-1/thread_grid}}
+        \end{center}
+    \end{figure}
+    
+\end{frame}
+
+
+
+\begin{frame}{Calling a kernel function -- example} 
+
+    \vspace{0.5 em}
+    Goal:
+    \begin{small}
+    \begin{itemize}
+        \item Process each input element using exactly one thread {\footnotesize (not always the case)}
+    \end{itemize}
+    \end{small}
+    
+    \vspace{0.5 em}
+    
+    Open questions (OQs):
+    \begin{small}
+    \begin{enumerate}
+        \item How would you define the block- and grid size? {\footnotesize (\# threads in block and \# blocks in grid)}
+        \item How does a thread know which element it should process?
+    \end{enumerate}
+    \end{small}
+    
+    \vspace{0.5 em}
+    
+    \begin{figure}[t]
+        \centering
+        \begin{center}               
+            \resizebox{0.8\columnwidth}{!}{\input{figure/session-1/example_input_array}}
+        \end{center}
+    \end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{OQ$_\text{1}$: You decide how to divide the grid} 
+
+\begin{lstlisting}[language=C++]
+foo<<<1, 12>>>(input_data, output_data)
+foo<<<3, 4>>>(input_data, output_data)
+\end{lstlisting}
+
+\begin{figure}[t]
+    \centering
+    \begin{center}               
+        \resizebox{0.8\columnwidth}{!}{\input{figure/session-1/example_grid}}
+    \end{center}
+\end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{OQ$_\text{2}$: Importance of correct indexing} 
+
+\begin{lstlisting}[language=C++]
+foo<<<1, 12>>>(input_data, output_data)
+\end{lstlisting}
+
+\vspace{-0 em}
+
+\begin{figure}[t]
+    \centering
+    \begin{center}               
+        \resizebox{0.8\columnwidth}{!}{\input{figure/session-1/example_indexing_1_12}}
+    \end{center}
+\end{figure}
+
+Good: each thread handles exactly one element.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{OQ$_\text{2}$: Importance of correct indexing} 
+
+\begin{lstlisting}[language=C++]
+foo<<<3, 4>>>(input_data, output_data)
+\end{lstlisting}
+
+\vspace{-1 em}
+
+\begin{figure}[t]
+    \centering
+    \begin{center}               
+        \resizebox{0.8\columnwidth}{!}{\input{figure/session-1/example_indexing_3_4_wrong}}
+    \end{center}
+\end{figure}
+
+Problem: overwriting existing- and skipping elements.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{OQ$_\text{2}$: Correct indexing} 
+
+\begin{small}
+\begin{itemize}
+    \item Thread's position within block not enough -- relative position only
+    \item Include offset, equal to block size -- calculate absolute position within grid
+\end{itemize}
+\end{small}
+
+\begin{figure}[t]
+    \centering
+    \begin{center}               
+        \resizebox{0.8\columnwidth}{!}{\input{figure/session-1/example_indexing_3_4_correct}}
+    \end{center}
+\end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}{Useful built-in functions} 
+
+\vspace{0.75 em}
+
+\begin{itemize}
+    \setlength\itemsep{0.5 em}
+    \item Thread's index within the block \inline{threadIdx.x}
+    \item Block's index within the grid \inline{blockIdx.x}
+    \item Block's size (\# threads in block) \inline{blockDim.x}
+    \item Grid's size  (\# blocks in grid)\inline{gridDim.x}
+\end{itemize}
+
+\vspace{1cm}
+
+What is the largest possible block size (max. threads per block)?
+
+See p. 12 of the reference guide.
+
+\end{frame}
+
+
+
+
+\section{Exercise}
+
+
+\begin{frame}{First session's exercise} 
+
+    \vspace{0.25cm}
+
+    \begin{columns}[t] % align columns at the top
+    \column{0.6\textwidth} % first column
+    \textbf{Problem}
+    \begin{itemize}\setlength\itemsep{0.5em}
+        \item Flip array
+        \item Use multiple blocks with multiple threads
+    \end{itemize}
+    
+    \column{0.4\textwidth} % second column
+
+    \begin{figure}[t]
+        \centering
+        \begin{center}               
+            \resizebox{0.98\columnwidth}{!}{\input{figure/session-1/array_flip}}
+        \end{center}
+    \end{figure}
+    
+    \end{columns}
+
+
+    \vspace{0.5cm}
+    
+    \textbf{Goal}
+    \begin{itemize}\setlength\itemsep{0.5em}
+        \item Write and execute parallel code on the GPU
+        \item Migrate memory and verify the results (flipping)
+    \end{itemize}
+
+    \vspace{0.5cm}
+    
+    Reports are due by your next lab session.
+    
+
+\end{frame}
+
+
+
+
+\appendix
+\begin{frame}[noframenumbering,label=extraframe]{Extra slide}
+
+
+\begin{footnotesize}
+
+Images and figures borrowed from:
+
+\begin{itemize}
+    \item \url{https://github.com/mellinoe/veldrid-raytracer}
+    \item \url{https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html}
+\end{itemize}
+
+\end{footnotesize}
+
+
+\end{frame}
+
+
+\end{document}

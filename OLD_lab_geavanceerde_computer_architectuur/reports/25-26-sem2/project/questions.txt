@@ -1,0 +1,187 @@
+- Sander & Isaak: Aerodynamische FPV frames simulatie
+Feedback:
+Niet genoeg context/uitleg vd methode
+
+Questions:
+' Omdat de cellen onafhankelijk
+van elkaar geüpdatet kunnen worden, wijzen we simpelweg elke cel toe aan een eigen thread
+op de GPU.'
+=> hoe verdeel je de verschillende cellen dan in blocks?
+=> heeft elke cel dezelfde rekentijd?
+=> relaxatieparameter=1.8 waarom?
+=> welke gpu gebruikt?
+=> vertrokken van een online repo of alles zelf geschreven?
+=> zelfde resultaten tussen cpu en gpu?
+=> waarom heb je geen shared memory gebruikt? zijn er plaatsen waar het nuttig zou zijn?
+=> welke block size? verschillende waardes getest?
+=> bij cpu multi core versie maar 6x speedup tov van single core?
+maar je gebruikt 28 thread tov 1 waar zit de beperking?
+=> ben je zeker dat je resultaat correct is? hebben julli sanity checks gedaan?
+
+________________________________________________________________________________________________________
+
+Robin De Vos, Anthony Tacquet - game of life:
+Feedback:
+good intro
+stay to high level
+no concepts of lab used
+not critical
+
+Questions:
+- why not generate random number on cpu and pass it?
+- if else statements in your kernels?, will there be thread divergence
+- uint32 to store rgb and nr of neighbors, why not just 4 uint8s?
+=> zie je hier een performance winst van?
+=> (ze willen memory coalescing maar weten ze dat?)
+- the timing infor in the table is this including memorytransfer?
+- you mentioned a technique called branch wrapping in your report, what is it?
+(to speed up modulo operation, modulo is slow but no idea what branch wrapping is
+or how it could help)
+- welke blocksizes gebruiken jullie? warps? memory types?
+- hoe zou je shared memory kunnen gebruiken? (elke cel heeft 8 buren nodig)
+- 1 thread per cel?
+- Welke threads-per-block gebruiken jullie en hoe hebben jullie die gekozen? Heeft variatie hierop invloed op de performance?"
+- hoe zorg je ervoor dat cellen niet overschreven worden terwijl buren ze nog nodig hebben?
+(if twee aparte matrices, hoe zou je het doen met 1)
+ 
+________________________________________________________________________________________________________
+
+Charlotte Bert, Sander Haustraete - Image Processing
+Feedback:
+- goede intro
+- bronnen nice
+- geen voorbeelden in verslag?
+- geen code
+
+
+Questions:
+- edge detection gpu trager dan cpu, waar zou je nog winst kunnen maken?
+- 3 toepassingen, kan je verklaren waarom sommige wel sneler zijn op gpu?
+- zit pycuda hier voor iets tussen?
+- zijn er beperkingen bij het gebruik van pycuda? wat kan je wel en niet doen?
+=> heb je controle over blocksizes etc?
+- opencv heeft ook cuda suport, heb je dat bekeken?
+"OpenCV heeft een eigen CUDA-backend (cv2.cuda.Sobel, cv2.cuda.GaussianBlur). Waarom hebben jullie eigen PyCUDA-kernels geschreven in plaats van die te gebruiken? Wat hadden jullie geleerd in beide gevallen?"
+- waarom pycuda? hoe is de workflow?
+- blocksizes etc?.
+________________________________________________________________________________________________________
+
+Stijn Verhaeghe, Anders Bosman - Snake Battle Royale
+
+Feedback:
+zeer goed
+duidelijke beschrijving
+stapsgewijs opgebouwd
+geen conclusie
+
+Questions:
+- 1 thread per slang?
+- hebben jullie raceconditions? hoe wordt bepaald welke slang eerst berekend wordt?
+- je heb met een structure of arrays gewerkt ipv array of structures, wat win je hiermee?
+(memory coalescing)
+- blocksize?
+- je steekt de alive list in shared memory, wat zou je doen als deze te groot is?
+(lokaal opsplitsen? wrs niet volle lijst nodig?)
+
+________________________________________________________________________________________________________
+Arne Van der Stede & Syme Vandenbosch - simulatie van magnetische velden
+Feedback:
+- veel scenario's maar weinig diepte per scenario
+
+
+Questions:
+- waarom cupy?
+- beperkingen cupy?
+- zelf geschreven of van iets gestart?
+- heb je met blocksizes etc gespeeld?
+- is er ergens shared memory gebruikt?
+- wat wordt er per thread uitgevoerd?
+- zou je ergens constant memory kunnen gebruiken?
+=> sommiged dingen heeft elke thread nodig, kan je dit doen in cupy?
+Jullie segment-data zijn ~7 KB, read-only, en worden door alle threads in elke loop-iteratie gelezen. Lab 4 ging over constant memory. Waarom hebben jullie dat hier niet gebruikt en wat zou je verwachten qua winst
+- waarom blocksize 256
+________________________________________________________________________________________________________
+Feniks De Smet & Thomas Groothuis - BarraCuda
+
+Feedback:
+- git repo staat private
+- very deep explanations but try not to miss the highlevel view/explanation
+- no figure of game?
+- not a cuda project:
+Dit is geen CUDA-project, en dat is een probleem. De opdracht was "iets versnellen op de GPU" in een vak dat zes labozittingen aan CUDA besteed heeft (warps, atomics, shared/constant memory, streams). Jullie hebben een prachtig C++/OpenGL-project gebouwd dat de Python-baseline ruim verslaat, maar de speedup komt uit drie bronnen die geen van alle GPU-compute zijn: (1) Python → C++ migratie, (2) O(N²) → O(N) via spatial grid, en (3) draw-call-reductie via instanced rendering. Niets daarvan vereist een CUDA-kernel of demonstreert dat jullie de labo-concepten op compute-niveau beheersen.
+- jullie Boids-update zou een mooie CUDA-kernel zijn. Elke fish berekent separation/alignment/cohesion ten opzichte van zijn buren — dat is data-parallel, het zou shared memory kunnen gebruiken voor neighbor-batches, en het zou een mooi demonstratie zijn van wat jullie in labo geleerd hebben. De spatial-grid-bouw zelf is een atomics-probleem (lab 2). De fragment shader maths is leuk maar dat is gewoon graphics — niet wat dit vak meet.
+
+Questions:
+- waarom is de boid logic niet op GPU?
+- only rendering on the GPU?
+- je redeneert waarom je het niet op de gpu doet maar heb je het ook geprobeerd?
+- het is en blijft een labo cuda wat  je nu niet gebruikt hebt.
+- reden is pciE latency maar heb je die gemeten?
+- in the figures comparing cpu vs gpu why does the gpu plot stop at around 600 entities?
+while the cpu version has more?
+- why is array of structures better than structure of arrays? (fig 3)
+- hoeveel speedup komt van de move van python naar c++ en hoeveel uit gpu rendering? 
+- hoeveel speedup komt door 'the spatial grid' enkel naar buren kijken?
+- hoe zou je de boid logica op de gpu zetten?
+zou je shared memory kunnen gebruiken?
+
+________________________________________________________________________________________________________
+Matt Delalieux & Radi Miah - Boids in unity
+
+Feedabck:
+- 'Because Unity limits thread synchronization
+to a single block (max 1024 threads)' => not unity this is a cuda concept
+-  geen code?
+- geen visualisatie vd boids?
+
+
+Questions:
+- are there limitations of unity that you could do in c++ and cuda but not in unity?
+- zou je ergens constant memory kunnen gebruiken?
+- stel dat je dit puur in cuda gedaan had ipv unity zou je nog een speedup verwachten?
+- zijn er specifieke bottlenecks die je ziet door unity?
+- zijn jullie from scratch begonnen of van een online implementatie?
+
+
+________________________________________________________________________________________________________
+Cas Truyers & Niels Verhoeve - Depth Estimation
+
+Feedback:
+- te veel stappenplan/ wat ben ik op mijn pad tegengekomen
+- weinig gewerkt op gpu optimalisatie meer op algoritmische vereenvoudiging
+
+Questions:
+- 1 kernel per pixel?
+- is er kwaliteits verlies als je van rgb naar grayscale gaat voor de depth sensing?
+- veel optimalizaties aan de algoritme kant (rgb => grayscale, texture threshold, window radius)
+maar weining op vlak van gpu optimalisatie, heb je hier nog  ideeen? of experimenten?
+- enig idee waarom shared memory niet beter is?
+	Bij MAX_D=256 betekent dat per block honderden KB shared memory nodig, wat de occupancy drastisch verlaagt. Lagere occupancy = minder warps om memory latency te verbergen = potentieel trager dan global memory met goede caching. Dit is exact het tegenovergestelde van wat shared memory beoogt.
+- vertrokken van bestaande code?
+- blocksizes etc? mee gespeeld?
+
+
+________________________________________________________________________________________________________
+Elias & Wout - N-body simulations
+=> te laat
+
+Feedback:
+
+
+
+Questions:
+- waarom geen shared memory?
+- Heb je een cpu implementatie om mee te vergelijken?
+- waar zit het meeste winst?
+- Moeilijk om te zeggen of dit goed of slecht is aangezien er geen vergelijkingspunt is?
+
+
+
+
+
+
+
+
+
+
+

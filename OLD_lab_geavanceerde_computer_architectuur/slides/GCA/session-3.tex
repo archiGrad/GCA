@@ -1,0 +1,277 @@
+% kuleuventheme2 by Janez Kren, September 2017, janez.kren@kuleuven.be, based on:
+% kuleuventheme 1.3 by Roland Pastorino, 2013 roland.pastorino@kuleuven.be / www.rolandpastorino.com
+
+\PassOptionsToPackage{usenames, table, dvipsnames}{xcolor} % 
+\documentclass[11pt,t]{beamer}
+\usetheme{kuleuven2}	%THEME OPTIONS for LOGO: kul (default), kulak, lrd,    ; OPTIONS for TITLE PAGE: normal (default), sedes
+
+
+%%% OTHER SETTINGS
+\usefonttheme[onlymath]{serif}			% math font with serifs, delete to make it sans-serif
+\setbeamertemplate{footline}[body] 		% delete this line to remove footline bar on all frames
+%\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter} %enable for widescreen 16:9 ratio
+%\titlegraphic{ \includegraphics[width=.2\paperwidth]{mytitlepagepic.png} } %optional title page image
+
+
+%%% ADDED BY ALEX (start)
+\usepackage[english]{babel}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{pythonhighlight}
+
+\usepackage[orientation=landscape,size=custom, width=16,height=9,scale=0.5,debug]{beamerposter} 
+
+\definecolor{mygray}{rgb}{0.8,0.8,0.8}
+\newcommand{\inline}[1]{ \colorbox{mygray}{\lstinline{#1}}}
+
+\usepackage{xcolor}
+
+\usepackage{layouts} % To get text/page width
+
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+% \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{backcolour}{rgb}{0.93,0.93,0.95}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\usepackage{listings}
+
+%%% ADDED BY ALEX (stop)
+
+
+%%% TITLE PAGE INFO:
+\title[Geavanceerde Computerarchitectuur 3$^{\text{rd}}$ session]{Geavanceerde Computerarchitectuur 3$^{\text{rd}}$ session} %[]] will appear in footline
+\subtitle{Optimization techniques, \\ Partitioning the grid into warps and reducing thread divergence}
+
+\author{Thomas Feys, {\footnotesize thomas.feys@kueluven.be}}
+\institute{DRAMCO -- WaveCore -- ESAT}
+\date{}
+
+
+
+\begin{document}
+\csname beamer@calculateheadfoot\endcsname %recalculate head and foot dimension
+
+
+ %%
+ %%  0. TITLE PAGE and TABLE OF CONTENT
+ %%
+% Title page
+\begin{frame}[plain,noframenumbering]
+	\titlepage
+\end{frame}
+	
+
+% Table of Contents
+\begin{frame}{Outline}
+	\hfill	{\large \parbox{.961\textwidth}{\tableofcontents[hideothersubsections]}}
+\end{frame}
+
+
+
+
+\section{Background}
+
+
+\begin{frame}{A warp}
+    \begin{itemize}\setlength\itemsep{1em}
+        \item A warp is a group of 32 threads
+        \item $\text{number of warps} = \ceil*{ \frac{\text{Threads per block}}{\text{32}}} \cdot \text{number of blocks}$
+        \item For example
+        \begin{itemize}\setlength\itemsep{0.5em}\vspace{1mm}
+            \item \inline{foo<<<2,64>>>()} \uncover<2->{$\Rightarrow$ 4 (128 threads \dots 128 cores)}
+            \item \inline{foo<<<4,33>>>()} \uncover<3->{$\Rightarrow$ 8 (132 threads \dots \textbf{256 cores})}
+        \end{itemize}
+        \uncover<4->{\item Also called \textit{a sub-group} in OpenCL, a \textit{wavefront} by AMD, \dots}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Threads are grouped into warps and mapped to cores}
+    \vspace{-2mm}
+    
+    \begin{figure}
+        \centering
+        \resizebox{0.9\textwidth}{!}{\input{figure/session-3/warps}}
+    \end{figure}
+
+    % \vspace{-2mm}
+    A block is divided into warps. The warps of a block are associated with a single stream multiprocessor (SM) -- the GT 740 has 2 SMs, each with 192 cores.
+    
+\end{frame}
+
+
+\begin{frame}{"Warping" can over provision GPU resources}
+    Assume an input array with 384 elements and a GPU with 384 CUDA cores
+
+    How many warps are spawned?
+    \begin{itemize}\setlength\itemsep{0.5em}
+        \item \inline{foo<<<2, 192>>>(...)} \uncover<2->{$\Rightarrow$ 12 (requires 384 cores)}
+        \item \inline{foo<<<384, 1>>>(...)} \uncover<3->{$\Rightarrow$ 384 (requires 12288 cores)}
+        \uncover<4->{\item \inline{foo<<<1, 192>>>(...)} $\Rightarrow$ 6 (requires 192 cores, 2 thread iterations (striding))}
+        \uncover<5->{\item \inline{foo<<<1, 384>>>(...)} $\Rightarrow$ 12 (requires 192 cores, 2 scheduling iterations)}
+    \end{itemize}
+    
+\end{frame}
+
+
+\begin{frame}[fragile]{Thread divergence within a warp}
+
+    \begin{itemize}\setlength\itemsep{0.5em}
+        \item Part of the warp has higher complexity, taking longer to execute.
+        \item The other part of the warp becomes idle (has finished its job).
+        \item Idle threads occupy cores and do not contribute to the processing of data.
+    \end{itemize}
+
+\vspace{2mm}
+
+\begin{lstlisting}[language=C++]
+__global__ void addOrMultiply(int *a, int *b, int *c) {
+    int tid = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (tid % 2 == 0) {     // If tid is even, add elements
+        c[tid] = a[tid] + b[tid];
+    } else {                // If tid is odd, multiply elements
+        c[tid] = a[tid] * b[tid];
+    }
+}
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}{Striding}
+
+    \begin{itemize}
+        \item When the matching between threads and elements is not 1:1
+        \item A thread may compute multiple elements
+        \item \inline{if(abs_tid < input_size}{...} $\Rightarrow$ \inline{while(...){...}} or \inline{for(...){...}}
+    \end{itemize}  
+
+    \begin{figure}
+        \centering
+        \resizebox{0.75\textwidth}{!}{\input{figure/session-3/striding}}
+    \end{figure}
+    
+    \inline{index = abs_tid + k * grid_size}, where \inline{index < input_size}
+    
+\end{frame}
+
+\begin{frame}
+    Good explanation see: \url{https://alexminnaar.com/2019/08/02/grid-stride-loops.html}
+\end{frame}
+
+
+\begin{frame}{Striding, divergence, and warps on an example}
+    
+    Assume we're using the GT 740 (2 SMs, each with 192 cores) and:
+    \begin{itemize}\setlength\itemsep{0.5em}\vspace{1mm}
+        \item We spawn a kernel with a single block of 256 threads
+        \item To process an input array with 260 elements
+        \item Striding is implemented
+    \end{itemize}
+
+    \vspace{3mm}
+    \begin{itemize}\setlength\itemsep{0.5em}
+        \uncover<2->{\item Is there thread divergence?}\uncover<3->{ {\color{Gray} Yes, at least one warp of 32 threads has to run twice, while only 4 threads are needed. Divergence can be avoided by using inputs with a size that is a multiple of 32.}}
+        \uncover<4->{\item How many cores are utilized?}\uncover<5->{ {\color{Gray} Only 192 cores are utilized since a block (all of its warps) gets mapped to one SM.}}
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Blackboard example}
+    Assume we're using the GT 740 (2 SMs, each with 192 cores) and:
+    \begin{itemize}\setlength\itemsep{0.5em}\vspace{1mm}
+        \item We spawn a kernel with a single block of 256 threads
+        \item To process an input array with 260 elements
+        \item Striding is implemented
+    \end{itemize}
+\end{frame}
+
+
+\section{Exercise}
+
+\begin{frame}{Goal}
+
+    \textbf{Part 1 -- warps}
+    \begin{itemize}\setlength\itemsep{0.5em}\vspace{1mm}
+        \item Implement a kernel that inverts an image (calculate $x = 255 - x$, where $x \in (0, 255)$, for each color component -- RGB).
+        \item Assess how the number of threads (full/partial warps) influences the computation time.
+        \item See pointers below!
+    \end{itemize}
+
+\end{frame}
+\begin{frame}
+    \textbf{Part 2 -- thread divergence}
+    \begin{itemize}\setlength\itemsep{0.5em}\vspace{1mm}
+        \item Augment the inversion kernel, so that the R color component is calculated as 1D-Gaussian blur of its neighbors. Namely the $i^{\mathrm{th}}$ red pixel $r_i$ is obtained as $r_i = 0.1 r_{i-2} + 0.25 r_{i-1} + 0.5 r_i + 0.25 r_{i+1} + 0.1 r_{i+2}$ i.e., a Gaussian weighted sum of its 1D-neighboring red pixel values. 
+        \item  Note that the green and blue values are still processed as before ( $x = 255 - x$)
+        \item Assess how thread divergence impacts the computation time.
+        \item See pointers below!
+    \end{itemize}
+
+    { \textit{I encourage you to discuss all parts in the report, even if not fully implemented!}}
+    
+\end{frame}
+
+
+\begin{frame}{Some pointers - part 1}
+
+\begin{itemize}\setlength\itemsep{1em}
+    \item Implement the inverse kernel and use the provided image load/save function (Toledo $\rightarrow$ Docs) to invert an image. You can use as many threads as there are input elements.
+    \item Implement striding in the above kernel $\rightarrow$ if difficult, first implement striding in a simpler kernel that handles a short 1D sequence, for example, using 12 threads, 16 elements (0, 1, \dots, 15), and adding 1 to each element.
+    \item Check that the inversion kernel, with the added striding, generates a fully-inverted image even when using less threads than there are input data elements. For example, consider a ratio of 1:16 (threads:elements).
+\end{itemize}
+    
+\end{frame}
+
+
+\begin{frame}{Some pointers - part 1}
+
+\begin{itemize}\setlength\itemsep{1em}
+    \item Invoke the inverse kernel from a loop, where you progressively use more threads. Time the kernel on every iteration (see cheat sheet).
+    \item Get the average execution time, as the time may vary. For example, due to preemption by the OS. 
+    \item Note that on some setups, the GPU may take more time to finish when first invoked -- you can avoid this by calling the function once before actually timing it.
+\end{itemize}
+    
+\end{frame}
+
+
+\begin{frame}{Some pointers - part 2}
+
+\begin{itemize}\setlength\itemsep{1em}
+    \item Make a second kernel, where the R color component is processed according to the provided equation. 
+    \item Check that the returned image is indeed different.
+    \item Now make a second kernel, which instead of processing \inline{RGBRGB...RGB} operates on an input format of \inline{RR...RGGG...GBB...B} (re-format the data correspondingly).
+    \item Evaluate how the execution time changes with / without thread divergence.
+\end{itemize}
+    
+\end{frame}
+
+
+\end{document}
+\fancyarrow{Hello}{World}.

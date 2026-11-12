@@ -1,0 +1,24 @@
+
+
+\begin{tikzpicture}[]
+
+
+
+
+% Full grid, threads
+\foreach \x in {0,...,8} {
+
+    \draw[black] (0.5*\x,1.0) rectangle ++(0.5,-0.5);
+    \node[] at (0.5*\x+0.25,1.0-0.25) {\x};
+    
+    \draw[black] (4-0.5*\x,0.0) rectangle ++(0.5,-0.5);
+    \node[] at (4-0.5*\x+0.25,-0.25) {\x};
+
+    \node[anchor=west, align=left] at (-1.25,  0.75) {In:};
+    \node[anchor=west, align=left] at (-1.25, -0.25) {Out:};
+    
+}
+
+
+
+\end{tikzpicture}

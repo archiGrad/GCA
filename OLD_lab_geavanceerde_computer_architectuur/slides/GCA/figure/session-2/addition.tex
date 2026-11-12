@@ -1,0 +1,35 @@
+
+
+\begin{tikzpicture}[]
+
+
+
+%%% DRAWING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\foreach \x in {0,...,7} {
+
+    \draw[black] (\x, 0) rectangle ++ (1, 1);
+    
+    \draw[black] (\x, -3) rectangle ++ (1, 1);
+   
+    \node[anchor=center, align=center] at (\x+0.5, 0.5) {\x};
+    
+    \node[anchor=center, align=center] at (\x+0.5, -0.25) {$+\!\!=$};
+
+    \draw[-{angle 60}] (\x+0.5, -0.5) to[out=-90, in=90] (0.5,-2);
+    
+    \node[anchor=center, align=center] at (\x+0.5, -2.5) {\x};
+    
+}
+
+\fill[white] (0.1, -2.9) rectangle ++ (0.8, 0.8);
+\node[anchor=center, align=center] at (0.5, -2.5) {\textbf{?}};
+
+
+\draw[gray] (0.5, -2.5) circle (1cm);
+\node[gray, anchor=center, align=center] at (0.5, -3.75) {Result};
+
+
+\end{tikzpicture}

@@ -1,0 +1,16 @@
+\frametitle{OQ$_\text {2}$: Correct indexing}
+
+\begin{small}
+\begin{itemize}
+    \item Thread's position within block not enough -- relative position only
+    \item Include offset, equal to block size -- calculate absolute position within grid
+\end{itemize}
+\end{small}
+
+\begin{figure}[t]
+    \centering
+    \begin{center}
+        \resizebox{0.8\columnwidth}{!}{\input{figure/session-1/example_indexing_3_4_correct}}
+    \end{center}
+\end{figure}
+

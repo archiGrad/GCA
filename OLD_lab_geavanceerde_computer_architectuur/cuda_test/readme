@@ -1,0 +1,13 @@
+to compile run:
+nvcc test.cu -o test
+
+to run:
+./test
+
+
+to install vs code:
+su -b230admin 
+sudo snap install --classic code
+
+to install nvcc:
+sudo apt install nvidia-cuda-toolkit

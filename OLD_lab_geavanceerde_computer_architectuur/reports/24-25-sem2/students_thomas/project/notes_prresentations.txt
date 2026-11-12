@@ -1,0 +1,62 @@
+notes pres GCA:
+
+grading points:
+- clear discription of the problem (motivation why gpu)
+- introduce implemntation (high level, structures, extensions)
+- critical anlyisis (shorthcomings, improvements, questions answered)
+
+
+Group 1: Raycasting christoph wout
+- miss minste context
+- vragen: meerdere reflecties hoe aangepakt? binnen zelfde thread?
+in loop? dynamisch? teveel verzwakking => geen reflecties meer?
+=> ok maar niet geweldig
+iets meer context miss en redenen waarom GPU
+ook niets over hoe de code in elkaar zit
+niet super kritisch 
+meh
+
+Group 2: object tracking indra & Arno
+goede motivatie
+duidelijke voorstelling algoritme
+=> vragen redelijk ok maar niet alles zeer zuiver
+- vragen: 
+ - ook getest met enkel 1024?
+ - warp efficientie 1 vs 1024, verwacht je dan geen 32x increase ipv 2x increase?
+ - s12 niet volledig mee
+ - resultaten over hoeveel runs?
+ - welke schaling met frame grote?
+
+Group 3: robbe en lukas
+- const mem nice
+- 
+- vragen:
+	matmul geoptimaliseerd? => per thread in parallel 
+	niet matmul in parallel
+	1 thread per punt? => striding 
+
+Group 4: fractalen victor & cian
+context nice
+poging voor dynamic parallellismn goed uitgelegd
+sommige dingen niet voledig geimplementeerd
+- vragen: 
+	- 700k iteraties hoe lang gerunt?
+	- thread div? striding voor gemideld te fixen
+	=> timing verschil met en zonder striding? 
+	-
+	overall goede antwoorden
+
+Group 5: Artificial life Arne & Thibault
+- context duidelijk
+- intro duidelijk
+code structuur niet zo duidelijk, wat geimplementeerd?
+beperkte timing info 
+- vragen:
+	- spreken de separation en allignment elkaar niet tegen?
+	- welke berekeningen gebeuren er met die vector? dot product, sum, ..?
+	- ook op gpu?
+	-
+=> niet zo goed geantwoord redelijk clueless
+
+
+

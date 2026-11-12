@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CFD Simulation UI</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     TOP BAR — System monitor
+═══════════════════════════════════════════════════════════════════════ -->
+<header class="topbar">
+  <span class="logo">⚡ CFD UI</span>
+  <div class="monitor-widgets">
+    <div class="widget">
+      <span class="label">GPU</span>
+      <canvas id="chartGpuUtil" width="80" height="30"></canvas>
+      <span class="val" id="valGpuUtil">—</span>
+      <span class="unit">%</span>
+    </div>
+    <div class="widget">
+      <span class="label">VRAM</span>
+      <span class="val" id="valVram">—</span>
+      <span class="unit">MB</span>
+    </div>
+    <div class="widget">
+      <span class="label">GPU °C</span>
+      <span class="val" id="valGpuTemp">—</span>
+    </div>
+    <div class="widget sep">
+      <span class="label">CPU</span>
+      <canvas id="chartCpu" width="80" height="30"></canvas>
+      <span class="val" id="valCpu">—</span>
+      <span class="unit">%</span>
+    </div>
+    <div class="widget">
+      <span class="label">RAM</span>
+      <span class="val" id="valRam">—</span>
+      <span class="unit">%</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     MAIN LAYOUT: left config | center progress+log | right results
+═══════════════════════════════════════════════════════════════════════ -->
+<main class="layout">
+
+  <!-- ── LEFT PANEL ──────────────────────────────────────────────────── -->
+  <section class="panel" id="panelConfig">
+    <h2>Configuration</h2>
+
+    <!-- STL upload -->
+    <div class="card" id="dropzone">
+      <div id="dropText">Drag & drop STL here, or <label for="stlFile" class="link">browse</label></div>
+      <input type="file" id="stlFile" accept=".stl" hidden />
+      <div id="stlName" class="stl-name"></div>
+    </div>
+
+    <!-- View selector -->
+    <label class="section-label">Projection view</label>
+    <div class="btn-group" id="viewBtns">
+      <button data-view="top">Top</button>
+      <button data-view="bottom">Bottom</button>
+      <button data-view="front">Front</button>
+      <button data-view="back">Back</button>
+      <button data-view="side_left" class="active">Side L</button>
+      <button data-view="side_right">Side R</button>
+    </div>
+
+    <!-- Heading -->
+    <label class="section-label">Heading (2D rotation after projection)
+      <span id="headingVal">-40°</span></label>
+    <input type="range" id="heading" min="-180" max="180" value="-40" step="1" />
+
+    <!-- 3D orientation -->
+    <label class="section-label">3D pre-rotation</label>
+    <div class="rot3d-grid">
+      <span>Rx</span><input type="range" id="r3x" min="-180" max="180" value="0" step="1"/><span id="r3xV">0°</span>
+      <span>Ry</span><input type="range" id="r3y" min="-180" max="180" value="0" step="1"/><span id="r3yV">0°</span>
+      <span>Rz</span><input type="range" id="r3z" min="-180" max="180" value="0" step="1"/><span id="r3zV">0°</span>
+    </div>
+    <label class="section-label">Flip axes</label>
+    <div class="flip-row">
+      <label><input type="checkbox" id="flipX"/> Flip X</label>
+      <label><input type="checkbox" id="flipY"/> Flip Y</label>
+      <label><input type="checkbox" id="flipZ"/> Flip Z</label>
+    </div>
+
+    <!-- Grid size -->
+    <label class="section-label">Grid size</label>
+    <div class="btn-group" id="gridBtns">
+      <button data-nx="512"  data-ny="256">512×256</button>
+      <button data-nx="1024" data-ny="512" class="active">1024×512</button>
+      <button data-nx="2048" data-ny="1024">2048×1024</button>
+    </div>
+    <input type="hidden" id="nx" value="1024" />
+    <input type="hidden" id="ny" value="512" />
+
+    <hr/>
+
+    <!-- Fluid preset -->
+    <label class="section-label">Fluid</label>
+    <select id="fluidPreset">
+      <option value="air">Air  (ω=1.8)</option>
+      <option value="water">Water  (ω=1.2)</option>
+      <option value="oil">Oil  (ω=0.9)</option>
+      <option value="custom">Custom…</option>
+    </select>
+    <div id="customOmega" style="display:none">
+      <label class="section-label">ω (omega) <span id="omegaVal">1.8</span></label>
+      <input type="range" id="omega" min="0.51" max="1.99" step="0.01" value="1.8"/>
+    </div>
+
+    <!-- Speed preset -->
+    <label class="section-label">Wind speed</label>
+    <select id="speedPreset">
+      <option value="fpv_race">FPV Race ~180 km/h  (u=0.06)</option>
+      <option value="fpv_hover">FPV Hover ~30 km/h  (u=0.04)</option>
+      <option value="car">Car ~100 km/h  (u=0.05)</option>
+      <option value="cycling">Cycling ~25 km/h  (u=0.025)</option>
+      <option value="walking">Walking ~5 km/h  (u=0.01)</option>
+      <option value="custom">Custom…</option>
+    </select>
+    <div id="customUin" style="display:none">
+      <label class="section-label">u_in <span id="uinVal">0.06</span></label>
+      <input type="range" id="uin" min="0.001" max="0.14" step="0.001" value="0.06"/>
+    </div>
+
+    <!-- Derived physics display -->
+    <div class="physics-info" id="physicsInfo"></div>
+
+    <!-- Iterations -->
+    <label class="section-label">Iterations</label>
+    <div class="row2">
+      <input type="number" id="iters" value="50000" min="100" max="500000" step="1000"/>
+      <span class="sub">Save every</span>
+      <input type="number" id="saveInterval" value="100" min="1" max="10000"/>
+    </div>
+
+    <!-- Inflow direction -->
+    <label class="section-label">Inflow direction</label>
+    <select id="inflowDir">
+      <option value="0">0 — Left→Right</option>
+      <option value="1" selected>1 — Right→Left</option>
+      <option value="2">2 — Top→Bottom</option>
+      <option value="3">3 — Bottom→Top</option>
+    </select>
+
+    <button class="btn-run" id="btnRun" onclick="startRun()">▶ Run Simulation</button>
+  </section>
+
+  <!-- ── CENTER PANEL ─────────────────────────────────────────────────── -->
+  <section class="panel" id="panelProgress">
+    <h2>Progress</h2>
+
+    <div class="stages">
+      <div class="stage" id="stage1">
+        <span class="stage-icon">⚙</span>
+        <div class="stage-info">
+          <span class="stage-name">1 — Compile</span>
+          <div class="bar-wrap"><div class="bar" id="bar1"></div></div>
+        </div>
+        <span class="stage-time" id="time1"></span>
+      </div>
+      <div class="stage" id="stage2">
+        <span class="stage-icon">🗺</span>
+        <div class="stage-info">
+          <span class="stage-name">2 — Generate Mask</span>
+          <div class="bar-wrap"><div class="bar" id="bar2"></div></div>
+        </div>
+        <span class="stage-time" id="time2"></span>
+      </div>
+      <div class="stage" id="stage3">
+        <span class="stage-icon">🚀</span>
+        <div class="stage-info">
+          <span class="stage-name">3 — CUDA Sim</span>
+          <div class="bar-wrap"><div class="bar" id="bar3"></div></div>
+        </div>
+        <span class="stage-time" id="time3"></span>
+      </div>
+      <div class="stage" id="stage4">
+        <span class="stage-icon">🎞</span>
+        <div class="stage-info">
+          <span class="stage-name">4 — Render MP4</span>
+          <div class="bar-wrap"><div class="bar" id="bar4"></div></div>
+        </div>
+        <span class="stage-time" id="time4"></span>
+      </div>
+    </div>
+
+    <div class="log-header">
+      <span>Live log</span>
+      <button class="btn-sm" onclick="document.getElementById('log').scrollTop=9999">↓</button>
+      <button class="btn-sm" onclick="document.getElementById('log').textContent=''">Clear</button>
+    </div>
+    <pre id="log" class="log"></pre>
+  </section>
+
+  <!-- ── RIGHT PANEL ──────────────────────────────────────────────────── -->
+  <section class="panel" id="panelResults">
+    <h2 class="panel-h2-row">
+      Results
+      <button class="btn-sm" id="btnClean" onclick="cleanJobs()">🗑 Clean Jobs</button>
+    </h2>
+    <video id="videoPlayer" controls style="width:100%;display:none;border-radius:6px;margin-bottom:10px"></video>
+    <div id="gallery"></div>
+  </section>
+
+</main>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

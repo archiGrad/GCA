@@ -1,0 +1,41 @@
+
+\begin{tikzpicture}[]
+
+\node[align=center, anchor=center] (gca) at (0, 0) {GCA lab};
+
+
+
+\node[align=center, anchor=center] (docs) at (0, 1.5) {Docs\\(Toledo)};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at (-2, 2.25) {Prog. guide};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( 0, 2.5) {Cheat sheet};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( 2, 2.25) {tasks.json};
+
+
+
+\node[align=center, anchor=center] (sess) at (3, -1) {5 Sessions};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( 3, 0 ) {Kernel};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( 4.5, 0 ) {Race c.};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( 5, -0.75 ) {Warps};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( 5, -1.5 ) {Memory};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( 4.5, -2.25 ) {Dynamic p.};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( 3, -2.25 ) {Async.};
+
+
+
+\node[align=center, anchor=center] (proj) at (-3, -1) {Project};
+% \node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( -3, 0 ) {Graphics};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( -4.5, 0 ) {\dots};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( -5, -0.75 ) {Neural Networks};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( -5, -1.5 ) {Encryption};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( -4.5, -2.25 ) {DSP};
+\node[align=center, anchor=center, font=\footnotesize, text=black!60!white] at ( -3, -2.25 ) {Graphics};
+
+
+\draw[black] (gca.south west) rectangle (gca.north east);
+
+\draw[] (gca.south west) -- (proj.north east);
+\draw[] (gca.south east) -- (sess.north west);
+\draw[] (gca.north) -- (docs.south);
+
+
+\end{tikzpicture}

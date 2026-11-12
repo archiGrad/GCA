@@ -1,0 +1,65 @@
+
+
+\begin{tikzpicture}[]
+
+
+%%% DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% https://associatie.kuleuven.be/huisstijl/kleuren
+\definecolor{blue1}{RGB}{82,189,236}
+\definecolor{blue2}{RGB}{0,64,122}
+\definecolor{blue3}{RGB}{31,171,231}
+\definecolor{blue4}{RGB}{29,141,176}
+\definecolor{blue5}{RGB}{17,110,138}
+\definecolor{orange1}{RGB}{221,138,46}
+
+
+\def\ThPoolCenterOneX{-2}
+\def\ThPoolCenterOneY{0}
+
+\def\ThPoolCenterTwoX{-5}
+\def\ThPoolCenterTwoY{0}
+
+
+%%% DRAWING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\filldraw [blue2, opacity=0.1] (\ThPoolCenterTwoX+1.8,\ThPoolCenterOneY) circle (2.8);
+
+\foreach \x in {1,...,6} {
+    \node[inner sep=0pt] at (\ThPoolCenterTwoX+\x/2, 1.5){\includegraphics[width=0.25cm]{figure/session-1/thread-small.png}};
+}
+\foreach \x in {-1,...,8} {
+    \node[inner sep=0pt] at (\ThPoolCenterTwoX+\x/2, 0){\includegraphics[width=0.25cm]{figure/session-1/thread-small.png}};
+}
+\foreach \x in {1,...,6} {
+    \node[inner sep=0pt] at (\ThPoolCenterTwoX+\x/2, -1.5){\includegraphics[width=0.25cm]{figure/session-1/thread-small.png}};
+}
+
+% Full grid, threads
+\foreach \x in {0,...,3} {
+    \draw[black, dashed] (4.5+\x,0.5) rectangle ++(1,-1);
+    \node[anchor=center] at (4.5+\x+0.5,0){\includegraphics[width=0.25cm]{figure/session-1/thread-small.png}};
+}
+
+% Blocks
+\foreach \x in {0,...,1} {
+    \draw[black, very thick] (4.5+2*\x,0.5) rectangle ++(2,-1);
+}
+
+
+\node[] at (-3.25, 3.25) {Pool};
+\node[] at ( 6.50, 1.25) {Grid};
+
+\draw[-{angle 60}] (0,0) -- (4,0);
+
+
+
+\node[] at ( 3.50, 2.75) {{\color{red}Two blocks}, each with {\color{blue}two threads}};
+
+\node[] at ( 3.50, 2.25) {foo\lstinline[language=C++]{<<<}{\color{red}2}, {\color{blue}2}\lstinline[language=C++]{>>>}(arg1, arg2, \dots)};
+
+
+\end{tikzpicture}

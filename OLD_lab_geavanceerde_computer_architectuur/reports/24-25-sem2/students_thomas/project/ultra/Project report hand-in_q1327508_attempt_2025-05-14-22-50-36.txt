@@ -1,0 +1,17 @@
+Name: Thibault Dekock (q1327508)
+Assignment: Project report hand-in
+Date Submitted: Wednesday, 14 May 2025 22:50:36 o'clock CEST
+Current Mark: Needs Marking
+
+Submission Field:
+<br>
+<p><a href="@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/internal/courses/ULTRA-B-KUL-JLI1QS-2425/gradebook/submission/attempt/4/8/1/_4333481_1/embedded/Arne_Vanmarcke_Thibault_Dekock.pdf" data-bbtype="attachment" data-bbfile="{&quot;alternativeText&quot;:&quot;Arne_Vanmarcke_Thibault_Dekock.pdf&quot;,&quot;displayName&quot;:&quot;Arne_Vanmarcke_Thibault_Dekock.pdf&quot;,&quot;fileName&quot;:&quot;Arne_Vanmarcke_Thibault_Dekock.pdf&quot;,&quot;fileSize&quot;:327651,&quot;mimeType&quot;:&quot;application/pdf&quot;,&quot;render&quot;:&quot;inline&quot;,&quot;resourceUrl&quot;:&quot;@X@EmbeddedFile.requestUrlStub@X@sessions/F1/F130934EF62D559F338A2369B8E8E4BF/d9a7a91478014fd9bf6f413f186ecafa/Arne_Vanmarcke_Thibault_Dekock.pdf&quot;,&quot;linkName&quot;:&quot;Arne_Vanmarcke_Thibault_Dekock.pdf&quot;,&quot;viewerUuid&quot;:&quot;--bav--9953c078-1b9e-4ce0-af3e-1e35d7c9e412&quot;,&quot;bbFileUuid&quot;:&quot;868847c564bc4a36a544b964c15fc64d&quot;}">Arne_Vanmarcke_Thibault_Dekock.pdf</a></p>
+<br>
+
+Comments:
+There are no student comments for this assignment.
+
+Files:
+	Original filename: Arne_Vanmarcke_Thibault_Dekock.pdf
+	Filename: Project report hand-in_q1327508_attempt_2025-05-14-22-50-36_Arne_Vanmarcke_Thibault_Dekock.pdf
+

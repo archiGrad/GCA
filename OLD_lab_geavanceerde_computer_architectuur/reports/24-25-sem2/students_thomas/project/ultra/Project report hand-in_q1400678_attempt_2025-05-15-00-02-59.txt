@@ -1,0 +1,17 @@
+Name: Cian Olieslagers (q1400678)
+Assignment: Project report hand-in
+Date Submitted: Thursday, 15 May 2025 00:02:59 o'clock CEST
+Current Mark: Needs Marking
+
+Submission Field:
+<br>
+<p><a href="@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/internal/courses/ULTRA-B-KUL-JLI1QS-2425/gradebook/submission/attempt/2/5/5/_4334255_1/embedded/FinalReport_ComputerArchitectuur_VictorDeforce_CianOlieslagers.pdf" data-bbtype="attachment" data-bbfile="{&quot;alternativeText&quot;:&quot;FinalReport_ComputerArchitectuur_VictorDeforce_CianOlieslagers.pdf&quot;,&quot;displayName&quot;:&quot;FinalReport_ComputerArchitectuur_VictorDeforce_CianOlieslagers.pdf&quot;,&quot;fileName&quot;:&quot;FinalReport_ComputerArchitectuur_VictorDeforce_CianOlieslagers.pdf&quot;,&quot;fileSize&quot;:88501680,&quot;mimeType&quot;:&quot;application/pdf&quot;,&quot;render&quot;:&quot;inline&quot;,&quot;resourceUrl&quot;:&quot;@X@EmbeddedFile.requestUrlStub@X@sessions/7E/7EF1AF1512A5EE9ABC58A6E040445091/59a74b01aea04bb0b58e9d813fa50843/FinalReport_ComputerArchitectuur_VictorDeforce_CianOlieslagers.pdf&quot;,&quot;linkName&quot;:&quot;FinalReport_ComputerArchitectuur_VictorDeforce_CianOlieslagers.pdf&quot;,&quot;viewerTimeToWait&quot;:60000,&quot;bbFileUuid&quot;:&quot;c66392f9ee3340dcb7d7bee4064d253c&quot;}">FinalReport_ComputerArchitectuur_VictorDeforce_CianOlieslagers.pdf</a></p>
+<br>
+
+Comments:
+There are no student comments for this assignment.
+
+Files:
+	Original filename: FinalReport_ComputerArchitectuur_VictorDeforce_CianOlieslagers.pdf
+	Filename: Project report hand-in_q1400678_attempt_2025-05-15-00-02-59_FinalReport_ComputerArchitectuur_VictorDeforce_CianOlieslagers.pdf
+

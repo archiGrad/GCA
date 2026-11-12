@@ -1,0 +1,6 @@
+\babel@toc {english}{}\relax 
+\beamer@sectionintoc {1}{Intermezzo}{3}{0}{1}
+\beamer@sectionintoc {2}{GPU memory access and memory types}{5}{0}{2}
+\beamer@sectionintoc {3}{Exercise}{18}{0}{3}
+\beamer@sectionintoc {4}{Appendix}{25}{0}{4}
+\beamer@sectionintoc {5}{Sources}{28}{0}{5}

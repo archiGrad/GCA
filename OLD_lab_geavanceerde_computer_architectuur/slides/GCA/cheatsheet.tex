@@ -1,0 +1,245 @@
+\PassOptionsToPackage{usenames, table, dvipsnames}{xcolor} % 
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{
+a4paper,
+total={170mm,257mm},
+left=20mm,
+top=28mm,
+bottom=12mm,
+}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{lipsum}  
+\usepackage{cmbright}
+\usepackage{iflang}
+\usepackage{pgfgantt}
+
+\def\plotFlag{true} % true / false
+
+
+\definecolor{lightblue}{RGB}{165, 214, 230}
+
+%----Helper code for dealing with external references----
+% (by cyberSingularity at http://tex.stackexchange.com/a/69832/226)
+
+\usepackage{xr}
+\makeatletter
+
+\newcommand*{\addFileDependency}[1]{% argument=file name and extension
+\typeout{(#1)}% latexmk will find this if $recorder=0
+% however, in that case, it will ignore #1 if it is a .aux or 
+% .pdf file etc and it exists! If it doesn't exist, it will appear 
+% in the list of dependents regardless)
+%
+% Write the following if you want it to appear in \listfiles 
+% --- although not really necessary and latexmk doesn't use this
+%
+\@addtofilelist{#1}
+%
+% latexmk will find this message if #1 doesn't exist (yet)
+\IfFileExists{#1}{}{\typeout{No file #1.}}
+}\makeatother
+
+\newcommand*{\myexternaldocument}[1]{%
+\externaldocument{#1}%
+\addFileDependency{#1.tex}%
+\addFileDependency{#1.aux}%
+}
+%------------End of helper code--------------
+
+% put all the external documents here!
+\myexternaldocument{main}
+
+
+%%% BEGIN: INCLUDES AND DEFINITIONS
+
+\usepackage[footnotesize,labelfont=bf]{caption}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{nicefrac, xfrac}
+% \usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xstring} % If clauses
+
+
+\usepackage{enumerate}
+
+\usepackage{amsmath, bm}
+\usepackage{bigstrut}
+
+\usepackage[export]{adjustbox} % For frame around figure
+
+
+\usepackage{algorithm}
+\usepackage{algpseudocode} 
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+% \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{backcolour}{rgb}{0.93,0.93,0.95}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+%%% END: INCLUDES AND DEFINITIONS
+
+
+
+ %%%%%%%%%%%%% define header/footer %%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{%  the preset of fancyhdr 
+    \fancyhf{} % clear all header and footer fields
+    \fancyfoot[R]{\includegraphics[width=2cm]{figure/KULEUVEN_GENT_RGB_LOGO.png}}
+    \fancyfoot[L]{\thedate}
+    \vspace{-0.7cm}\fancyhead[L]{Cheat sheet}
+    % \fancyhead[R]{\theauthor}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\headheight}{12.5pt}
+\setlength{\headsep}{0pt} % removes redudant vspace between document and header
+
+
+%%%%%%%%%%%%% update \maketitle to show title + student/promotors %%%%%%%%%%%%%
+\makeatletter
+\def\@maketitle{%
+  \newpage
+  \null
+  \vskip 3em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\LARGE \@title \par}%
+    \vskip 1em%
+    %{\large \@date}%
+  \end{center}%
+  \par
+  % \vskip 1em
+    % \noindent\begin{tabular}{@{}ll}
+    % Student & \theauthor\ (\class)\\
+    %  Promotor &  \promotor\\
+    %  Co-promotors & \copromotor
+    % \end{tabular}
+    }
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \definecolor{kulgrid2}{RGB}{29, 141, 176}
+% \definecolor{kulgrid3}{RGB}{17, 110, 138}
+% \definecolor{kullogo2}{RGB}{0, 64, 112}
+% \newcommand{\chg}[1]{{\color{kullogo2}#1}}
+% \newcommand{\alex}[1]{{\color{olive}[ALEX: #1]}}
+
+
+%%%%%%%%% UPDATE FOLLOWING ITEM %%%%%%%%%%%
+\title{Cheat sheet \\ \vspace{2mm}\footnotesize{Geavanceerde Computerarchitectuur (GCA)}}
+\author{Alex Marinsek}
+\date{February 2023}
+\def\promotor{}
+\def\copromotor{}
+\def\class{}
+\usepackage[english]{babel} % change english or dutch
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\baselinestretch}{1.25} 
+
+\begin{document} 
+
+\maketitle
+
+\vspace{2cm}
+
+This document lists several functions, definitions, etc., handy for the GCA lab. It is a living document, where updates are added according to the lab sessions and feedback from the students. Thanks for pointing things out.
+
+
+\textbf{GPU memory allocation}
+\begin{lstlisting}[language=C++]
+float* d_A;
+cudaMalloc(&d_A, size);
+\end{lstlisting}
+
+
+\textbf{Memory migration to / from GPU}
+\begin{lstlisting}[language=C++]
+float* h_A = (float*)malloc(size);
+cudaMemcpy(d_A, h_A, size, cudaMemcpyHostToDevice);
+cudaMemcpy(h_A, d_A, size, cudaMemcpyDeviceToHost);
+\end{lstlisting}
+
+
+\textbf{Kernel invocation (100 blocks, with 80 threads each)}
+\begin{lstlisting}[language=C++]
+foo<<<100, 80>>>(d_A);
+\end{lstlisting}
+
+
+\textbf{Thread indexing}
+\begin{lstlisting}[language=C++]
+int i = threadIdx.x;
+\end{lstlisting}
+
+
+\textbf{Setting to global scope (invoked by CPU or GPU)}
+\begin{lstlisting}[language=C++]
+__global__ void foo(d_A){...}
+\end{lstlisting}
+
+
+\textbf{Setting to GPU scope scope (invoked by GPU)}
+\begin{lstlisting}[language=C++]
+__device__ float foo(d_A){...}
+\end{lstlisting}
+
+
+\textbf{Timing (CPU)}
+\begin{lstlisting}[language=C++]
+#include <chrono>
+const auto start = std::chrono::steady_clock::now();
+...
+const auto end = std::chrono::steady_clock::now();
+const std::chrono::duration<double> elapsed_seconds{end - start};
+\end{lstlisting}
+
+
+\textbf{Timing (GPU)}
+\begin{lstlisting}[language=C++]
+cudaEvent_t start, stop;
+cudaEventCreate(&start);
+cudaEventCreate(&stop);
+cudaEventRecord(start);
+...
+cudaEventSynchronize();
+cudaEventRecord(stop);
+float milliseconds;
+cudaEventElapsedTime(&milliseconds, start_cuda, stop_cuda);
+\end{lstlisting}
+
+
+
+\end{document}

@@ -1,0 +1,37 @@
+\frametitle{Improvement by leveraging shared memory}
+\label{shared_memory_matmul}
+
+\begin{columns}[t]
+	\begin{column}{.45\textwidth}
+	    \vspace{-2.0em}
+        \begin{figure}[t]
+            \centering
+            \includegraphics[width=\columnwidth]{figure/session-4/matrix-multiplication-with-shared-memory.png}
+        \end{figure}
+	\end{column}
+	\begin{column}{.55\textwidth}{\small
+	    \vspace{-1.75em}
+	    \begin{center}
+	    \raggedright
+	        Assume:
+	        \vspace{0.1em}
+    	    \begin{itemize} \setlength\itemsep{0.5 em}
+    	        \item Matrices $\mathbf{A}$, $\mathbf{B}$, and $\mathbf{C}$ all NxN
+    	        \item NxN grid of threads
+    	        \item Square blocks with size BLOCK\_SIZE
+    	    \end{itemize}
+	        \vspace{0.5em}
+	        Then:
+	        \vspace{0.1em}
+    	    \begin{itemize} \setlength\itemsep{0.5 em}
+    	        \item Each thread writes 1 element in $\mathbf{C}$
+    	        \item Each thread copies one element from both $\mathbf{A}$ and $\mathbf{B}$ to shared memory, $k$-times
+    	        \item $\mathbf{A}$-rows and $\mathbf{B}$-columns are re-read $k$-times
+    	        \item $k = \frac{N}{BLOCK\_SIZE}$
+    	    \end{itemize}
+	    \end{center}
+	    }
+	\end{column}
+\end{columns}
+% ... discuss kernel design on blackboard ...
+

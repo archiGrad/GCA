@@ -1,0 +1,6 @@
+\frametitle{Pointers continued}
+
+\begin{itemize}\setlength\itemsep{0.75em}
+    \item You can experiment with NVIDIA Nsight Systems for profiling your code and seeing the different streams.
+\end{itemize}
+

@@ -1,0 +1,9 @@
+feedback labo 1:
+- de GPU’s die we gebruiken hebben 6 sm’s dus meer dan 6 blocks worden niet
+tegelijk uitgevoerd. => Een SM stuurd veel cores aan dus kan meerdere blocks tegelijk
+uitvoeren. Alle threads binnen 1 block worden wel op dezelfde SM uitgevoerd.
+
+- Als je de uitvoeringstijd van de kernel wil meten, neem een gemidelde (of som) over een aantal
+runs om consistentere resultaten te bekomen.
+
+- Als je uitvoeringstijden vergelijkt, maak een plot ipv een tabel.

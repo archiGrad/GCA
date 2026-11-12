@@ -1,0 +1,4 @@
+\babel@toc {english}{}\relax 
+\beamer@sectionintoc {1}{Dynamic parallelism}{3}{0}{1}
+\beamer@sectionintoc {2}{Asynchronous operation}{7}{0}{2}
+\beamer@sectionintoc {3}{Exercise}{14}{0}{3}

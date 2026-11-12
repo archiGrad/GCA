@@ -1,0 +1,44 @@
+
+
+\begin{tikzpicture}[]
+
+
+%%% DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% https://associatie.kuleuven.be/huisstijl/kleuren
+\definecolor{blue1}{RGB}{82,189,236}
+\definecolor{blue2}{RGB}{0,64,122}
+\definecolor{blue3}{RGB}{31,171,231}
+\definecolor{blue4}{RGB}{29,141,176}
+\definecolor{blue5}{RGB}{17,110,138}
+\definecolor{orange1}{RGB}{221,138,46}
+
+
+\def\SignalY{2}
+\def\GridY{0}
+\def\MultiplierX{1.2}
+
+\def\SquareSize{1}
+
+\def\ThPoolCenterTwoX{2}
+\def\ThPoolCenterTwoY{0}
+
+\def\NumOfSamples{12}
+
+\def\BlockDimX{4}
+
+
+%%% DRAWING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\foreach \x in {0,...,11} {
+    \draw[black] (\x * \MultiplierX, \SignalY) rectangle ++ (\SquareSize, \SquareSize);
+    \node at (\x * \MultiplierX + \SquareSize/2, \SignalY + \SquareSize/2) {in$_{\x}$};
+    \draw[<-] (\x * \MultiplierX + \SquareSize/2, \SignalY - 0.1) -- (\x * \MultiplierX + \SquareSize/2, \GridY + \SquareSize + 0.3);
+    \node[inner sep=0pt] at (\x * \MultiplierX + \SquareSize/2, \SignalY - 1.5){\includegraphics[width=1em]{figure/session-1/thread-small.png}};
+}
+
+
+\end{tikzpicture}
