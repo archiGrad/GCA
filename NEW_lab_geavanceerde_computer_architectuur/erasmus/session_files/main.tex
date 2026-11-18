@@ -1,0 +1,100 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2cm,bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{upquote}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=kulblue,urlcolor=kulblue]{hyperref}
+
+\definecolor{kulblue}{RGB}{29, 141, 176}
+\definecolor{codegreen}{rgb}{0,0.5,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.97}
+
+\lstdefinelanguage{CUDA}[]{C++}{
+  morekeywords={__global__,__device__,__host__,__shared__,dim3,
+    threadIdx,blockIdx,blockDim,gridDim,warpSize,
+    cudaMallocManaged,cudaMalloc,cudaMemcpy,cudaFree,cudaDeviceSynchronize,
+    cudaMemcpyHostToDevice,cudaMemcpyDeviceToHost,cudaGetLastError,cudaGetErrorString,
+    cudaEvent_t,cudaEventCreate,cudaEventRecord,cudaEventSynchronize,cudaEventElapsedTime},
+}
+
+\lstdefinestyle{gca}{
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta}\bfseries,
+  stringstyle=\color{codepurple},
+  numberstyle=\tiny\color{codegray},
+  basicstyle=\ttfamily\scriptsize,
+  columns=fullflexible,
+  breaklines=true,
+  breakatwhitespace=false,
+  postbreak=\mbox{\textcolor{codegray}{$\hookrightarrow$}\space},
+  keepspaces=true,
+  numbers=left,
+  numbersep=6pt,
+  showstringspaces=false,
+  upquote=true,
+  tabsize=4,
+  frame=single,
+  rulecolor=\color{backcolour},
+  xleftmargin=1.5em,
+  framexleftmargin=1.5em,
+  literate={—}{{---}}1 {×}{{$\times$}}1 {’}{{'}}1,
+}
+\lstset{style=gca}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\usepackage{subfiles}
+
+\newcommand{\headtitle}{GCA}
+\newcommand{\headdate}{}
+\newcommand{\gcapart}[2]{%
+  \clearpage
+  \renewcommand{\headtitle}{GCA -- #1}\renewcommand{\headdate}{#2}%
+  \phantomsection\addcontentsline{toc}{part}{#1}\part*{#1}}
+\newcommand{\session}[2]{%
+  \ifSubfilesClassLoaded{%
+    \renewcommand{\headtitle}{GCA -- Session #1}\renewcommand{\headdate}{#2}%
+    \title{\textbf{GCA -- Session #1}\\[2mm]\large Geavanceerde Computerarchitectuur}%
+    \date{#2 \quad (academic year 2026/2027)}%
+    \maketitle\thispagestyle{fancy}\tableofcontents\newpage
+  }{\gcapart{Session #1}{#2}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small \headtitle}
+\fancyhead[R]{\small Geavanceerde Computerarchitectuur}
+\fancyfoot[L]{\small \headdate}
+\fancyfoot[C]{\small \thepage}
+\fancyfoot[R]{\IfFileExists{figures/KULEUVEN_GENT_RGB_LOGO.png}{\includegraphics[width=2cm]{figures/KULEUVEN_GENT_RGB_LOGO.png}}{}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{\textbf{GCA}\\[2mm]\large Geavanceerde Computerarchitectuur}
+\author{Joris Putteneers\\\href{mailto:joris.putteneers@kuleuven.be}{\texttt{joris.putteneers@kuleuven.be}}}
+\date{academic year 2026/2027}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\tableofcontents
+\newpage
+
+\input{intro}
+\subfile{session_1}
+\subfile{session_2}
+\gcapart{Cheat sheet}{}
+\input{cheatsheet}
+
+\end{document}
