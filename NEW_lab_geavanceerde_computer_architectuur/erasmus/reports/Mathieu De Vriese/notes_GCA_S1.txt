@@ -1,0 +1,33 @@
+1) No need for contents at the beginning
+2) It would have been good to also undertsand the initial issue you had with dim3.. why you decided to work on this. perhaps a little introduction ot the problem?
+
+3) now in 08_flip,
+you do out[row][col] = in[rows -1 -row][cols -1 -col] which you flip the matrix 2 times. (essentialy a 180 degree rotation)
+the assignments specidically asks for reverse the elements of each row
+
+now the result will be 
+
+in[ROWS-1-row][COLS-1-col]
+
+ 7 6 5 4
+ 3 2 1 0
+
+and it should be, almost correct
+
+3 2 1 0  
+7 6 5 4 
+
+4) can you also calculate the dim3 blocks instead of assigning them?   
+how would this work ?  we can assume that the :  dim3 threads(2, 2);
+
+
+5) you are missing *  declarations in the pdf. dificult to see pointers.
+ int (*in)[COLS] and sizeof(*in)
+probably a latex issueA
+
+
+from my assesment, 14/20
+but if you can fix these errors = 17/20
+
+
+
