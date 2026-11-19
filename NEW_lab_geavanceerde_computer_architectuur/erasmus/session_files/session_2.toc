@@ -1,8 +1,25 @@
-\contentsline {section}{\numberline {1}Reading}{2}{section.1}%
-\contentsline {section}{\numberline {2}Race conditions}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}One increment is three operations}{2}{subsection.2.1}%
-\contentsline {paragraph}{Race condition.}{3}{section*.2}%
-\contentsline {subsection}{\numberline {2.2}09\_race\_condition.cu}{3}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Fix 1: atomic operations}{3}{section.3}%
-\contentsline {subsection}{\numberline {3.1}10\_atomic\_add.cu}{3}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Atomic functions}{4}{subsection.3.2}%
+\contentsline {section}{\numberline {1}Reading}{3}{section.1}%
+\contentsline {section}{\numberline {2}Race conditions}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}One increment is three operations}{3}{subsection.2.1}%
+\contentsline {paragraph}{Race condition.}{4}{section*.2}%
+\contentsline {subsection}{\numberline {2.2}09\_race\_condition.cu}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Fix 1: atomic operations}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}10\_atomic\_add.cu}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Atomic functions}{6}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Fix 2: reduction}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}11\_reduction.cu}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}11b\_reduction\_figure.cu}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}12\_reduction\_blocks.cu}{10}{subsection.4.3}%
+\contentsline {section}{\numberline {5}CPU versus GPU}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}13\_timing.cu}{11}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Locks}{12}{section.6}%
+\contentsline {subsection}{\numberline {6.1}14\_lock.cu}{12}{subsection.6.1}%
+\contentsline {section}{\numberline {7}Exercise: histogram (sessions 01 + 02)}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}15\_histogram.cu (solution)}{13}{subsection.7.1}%
+\contentsline {section}{\numberline {8}Submission: maximum intensity projection}{15}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Data}{15}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}How to use volume.h}{16}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Tasks}{17}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Questions}{17}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Report}{17}{subsection.8.5}%
+\contentsline {section}{\numberline {9}Lexicon}{17}{section.9}%

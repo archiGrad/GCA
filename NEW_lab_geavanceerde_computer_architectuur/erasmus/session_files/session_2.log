@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.1.31)  19 NOV 2026 03:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.1.31)  19 NOV 2026 04:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -556,32 +556,43 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) (./session_2.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 3.
-)
+<figures/KULEUVEN_GENT_RGB_LOGO.png, id=123, 234.1548pt x 74.4381pt>
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 24.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+ <./figures/KULEUVEN_GENT_RGB_LOGO.png>])
 \tf@toc=\write4
 \openout4 = `session_2.toc'.
 
-<figures/KULEUVEN_GENT_RGB_LOGO.png, id=40, 234.1548pt x 74.4381pt>
 File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
 <use figures/KULEUVEN_GENT_RGB_LOGO.png>
 Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
  3.
 (pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
- <./figures/KULEUVEN_GENT_RGB_LOGO.png>]
+[2]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 7
 .
-
-(/usr/share/texmf/tex/latex/lm/ts1lmr.fd
+ (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
+<figures/session_2_figures/race.jpg, id=144, 642.4pt x 344.28625pt>
+File: figures/session_2_figures/race.jpg Graphic file (type jpg)
+<use figures/session_2_figures/race.jpg>
+Package pdftex.def Info: figures/session_2_figures/race.jpg  used on input line
+ 45.
+(pdftex.def)             Requested size: 348.26233pt x 186.65253pt.
 File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
 <use figures/KULEUVEN_GENT_RGB_LOGO.png>
 Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
- 80.
+ 54.
 (pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
- [2]
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [3 <./figures/session_2_figures/race.jpg>] (/usr/share/texlive/texmf-dist/tex/
+latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -591,17 +602,23 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 89.
+(Font)              <5> on input line 67.
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 91.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 69.
 File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
 <use figures/KULEUVEN_GENT_RGB_LOGO.png>
 Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
- 141.
+ 115.
 (pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
- [3]
+ [4]
+<figures/session_2_figures/atomic.jpg, id=219, 642.4pt x 309.155pt>
+File: figures/session_2_figures/atomic.jpg Graphic file (type jpg)
+<use figures/session_2_figures/atomic.jpg>
+Package pdftex.def Info: figures/session_2_figures/atomic.jpg  used on input li
+ne 140.
+(pdftex.def)             Requested size: 348.26233pt x 167.60634pt.
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-148.
+157.
 
 (/usr/share/texmf/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -609,41 +626,131 @@ File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
 <use figures/KULEUVEN_GENT_RGB_LOGO.png>
 Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
- 207.
+ 161.
 (pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
- [4]
+ [5 <./figures/session_2_figures/atomic.jpg>]
 File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
 <use figures/KULEUVEN_GENT_RGB_LOGO.png>
 Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
- 209.
+ 231.
 (pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
- [5] (./session_2.aux)
+ [6]
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 283.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [7]
+<figures/session_2_figures/reduction.png, id=315, 865.2325pt x 611.28375pt>
+File: figures/session_2_figures/reduction.png Graphic file (type png)
+<use figures/session_2_figures/reduction.png>
+Package pdftex.def Info: figures/session_2_figures/reduction.png  used on input
+ line 344.
+(pdftex.def)             Requested size: 241.84843pt x 170.8598pt.
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 347.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [8]
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 400.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [9 <./figures/session_2_figures/reduction.png>]
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 469.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [10]
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 537.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+
+[11]
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 597.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [12]
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 667.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [13]
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 740.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [14]
+<figures/session_2_figures/mip.png, id=706, 256.96pt x 256.96pt>
+File: figures/session_2_figures/mip.png Graphic file (type png)
+<use figures/session_2_figures/mip.png>
+Package pdftex.def Info: figures/session_2_figures/mip.png  used on input line 
+747.
+(pdftex.def)             Requested size: 193.47578pt x 193.48016pt.
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 783.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [15 <./figures/session_2_figures/mip.png (PNG copy)>]
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 852.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+
+[16]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 895.
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 896.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [17]
+File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
+<use figures/KULEUVEN_GENT_RGB_LOGO.png>
+Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
+ 918.
+(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
+ [18] (./session_2.aux)
 Package rerunfilecheck Info: File `session_2.out' has not changed.
-(rerunfilecheck)             Checksum: 717757C374F29AF044EEE8A730EAABA9;1051.
+(rerunfilecheck)             Checksum: 3F1364AA738B020258F71A1A1B1534F9;3390.
  ) 
 Here is how much of TeX's memory you used:
- 13560 strings out of 478287
- 212332 string characters out of 5849289
- 1173986 words of memory out of 5000000
- 31421 multiletter control sequences out of 15000+600000
- 523448 words of font info for 63 fonts, out of 8000000 for 9000
+ 14298 strings out of 478287
+ 222865 string characters out of 5849289
+ 1585527 words of memory out of 5000000
+ 31630 multiletter control sequences out of 15000+600000
+ 544911 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,15n,129p,283b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/d
-vips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/shar
-e/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
-m-rm.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/f
-onts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.p
-fb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/
-share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/publ
-ic/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/
-texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/
-lmtt12.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb>
-Output written on session_2.pdf (5 pages, 282734 bytes).
+ 80i,15n,129p,320b,2145s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dv
+ips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/te
+xmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ma
+thit.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.
+pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/t
+ype1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></us
+r/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/publ
+ic/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/t
+exmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/l
+msy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.
+pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb>
+Output written on session_2.pdf (18 pages, 623085 bytes).
 PDF statistics:
- 254 PDF objects out of 1000 (max. 8388607)
- 215 compressed objects within 3 object streams
- 99 named destinations out of 1000 (max. 500000)
- 62 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1021 PDF objects out of 1200 (max. 8388607)
+ 951 compressed objects within 10 object streams
+ 618 named destinations out of 1000 (max. 500000)
+ 218 words of extra memory for PDF output out of 10000 (max. 10000000)
 

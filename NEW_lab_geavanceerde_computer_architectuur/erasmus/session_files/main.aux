@@ -17,64 +17,102 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \providecommand \oddpage@label [2]{}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{3}{section.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Goals, learning outcomes, and expectations}{3}{subsection.1.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces GPUs can execute more threads simultaneously than CPUs.}}{3}{figure.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces CUDA, an API for programming NVIDIA GPUs.}}{3}{figure.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Lab sessions}{3}{subsection.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Responsibilities and evaluation}{4}{subsection.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}Project}{4}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Goal and organization}{4}{subsection.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Implementation}{4}{subsection.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Some topic examples}{4}{subsection.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Grading -- guidelines based on thesis evaluation matrix}{4}{subsection.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Important dates}{5}{subsection.2.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Where to run?}{5}{section.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Environment and workflow.}}{5}{figure.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}On the lab PCs (no GPU of your own)}{5}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}On your own laptop: Windows with WSL}{6}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}On your own laptop: Linux (Ubuntu 24.04)}{6}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {part}{Session 01}{8}{section*.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Reading}{8}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Examples: ``hello'' to array flip}{8}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}01\_hello.cu}{8}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Short version.}{8}{lstlisting.-11}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Long version.}{8}{lstlisting.-12}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}02\_threads.cu}{9}{subsection.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Short version.}{9}{lstlisting.-13}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Long version.}{9}{lstlisting.-14}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Threads are organized into a grid of blocks.}}{10}{figure.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}02b\_threads\_2d.cu (2D thread block / multidimensional thread indexing)}{10}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Short version.}{10}{lstlisting.-15}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Long version.}{10}{lstlisting.-16}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}03\_blocks.cu}{11}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Short version.}{11}{lstlisting.-17}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Long version.}{11}{lstlisting.-18}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces You decide how to divide the grid.}}{12}{figure.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Correct indexing: add the block offset to get the absolute position.}}{12}{figure.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}04\_memory.cu}{12}{subsection.5.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Short version.}{12}{lstlisting.-19}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Long version.}{13}{lstlisting.-20}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Why we need bounds.}{14}{section*.14}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Which part of the program runs on the CPU and which on the GPU.}}{14}{figure.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}05\_bounds.cu}{15}{subsection.5.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Short version.}{15}{lstlisting.-21}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Long version.}{15}{lstlisting.-22}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.7}06\_flip.cu}{16}{subsection.5.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Short version.}{16}{lstlisting.-23}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Long version.}{16}{lstlisting.-24}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces First session's exercise: flip an array.}}{17}{figure.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.8}07\_flip\_inplace.cu}{18}{subsection.5.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Self-study: practical dim3 examples (2D image, 3D volume)}{19}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}2D: invert a grayscale image of W $\times $ H pixels}{19}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}3D: threshold a volume (CT scan, voxel grid) of X $\times $ Y $\times $ Z voxels}{19}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Expected for next week}{19}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{4}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Goals, learning outcomes, and expectations}{4}{subsection.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces GPUs can execute more threads simultaneously than CPUs.}}{4}{figure.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces CUDA, an API for programming NVIDIA GPUs.}}{4}{figure.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Lab sessions}{4}{subsection.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Responsibilities and evaluation}{5}{subsection.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Project}{5}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Goal and organization}{5}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Implementation}{5}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Some topic examples}{5}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Grading -- guidelines based on thesis evaluation matrix}{5}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Important dates}{6}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Where to run?}{6}{section.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Environment and workflow.}}{6}{figure.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}On the lab PCs (no GPU of your own)}{6}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}On your own laptop: Windows with WSL}{7}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}On your own laptop: Linux (Ubuntu 24.04)}{7}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {part}{Session 01}{9}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Reading}{9}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Examples: ``hello'' to array flip}{9}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}01\_hello.cu}{9}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Short version.}{9}{lstlisting.-11}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Long version.}{9}{lstlisting.-12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}02\_threads.cu}{10}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Short version.}{10}{lstlisting.-13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Long version.}{10}{lstlisting.-14}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Threads are organized into a grid of blocks.}}{11}{figure.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}02b\_threads\_2d.cu (2D thread block / multidimensional thread indexing)}{11}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Short version.}{11}{lstlisting.-15}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Long version.}{11}{lstlisting.-16}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}03\_blocks.cu}{12}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Short version.}{12}{lstlisting.-17}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Long version.}{12}{lstlisting.-18}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces You decide how to divide the grid.}}{13}{figure.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Correct indexing: add the block offset to get the absolute position.}}{13}{figure.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}04\_memory.cu}{13}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Short version.}{13}{lstlisting.-19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Long version.}{14}{lstlisting.-20}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Why we need bounds.}{15}{section*.14}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Which part of the program runs on the CPU and which on the GPU.}}{15}{figure.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}05\_bounds.cu}{16}{subsection.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Short version.}{16}{lstlisting.-21}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Long version.}{16}{lstlisting.-22}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7}06\_flip.cu}{17}{subsection.5.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Short version.}{17}{lstlisting.-23}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Long version.}{17}{lstlisting.-24}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces First session's exercise: flip an array.}}{18}{figure.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.8}07\_flip\_inplace.cu}{19}{subsection.5.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Self-study: practical dim3 examples (2D image, 3D volume)}{20}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}2D: invert a grayscale image of W $\times $ H pixels}{20}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}3D: threshold a volume (CT scan, voxel grid) of X $\times $ Y $\times $ Z voxels}{20}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Expected for next week}{20}{section.7}\protected@file@percent }
 \gdef \LT@i {\LT@entry 
     {1}{151.11053pt}\LT@entry 
     {1}{325.2417pt}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}08\_flip\_2d.cu: flip a 2D array (mirror an image horizontally)}{20}{subsection.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}Lexicon}{20}{section.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Race conditions}{1}{section.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10}Exercise}{2}{section.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {part}{Cheat sheet}{4}{section*.20}\protected@file@percent }
-\gdef \@abspage@last{26}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}08\_flip\_2d.cu: flip a 2D array (mirror an image horizontally)}{21}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Lexicon}{21}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {part}{Session 02}{24}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Reading}{24}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Race conditions}{24}{section.10}\protected@file@percent }
+\newlabel{sec:race}{{10}{24}{Race conditions}{section.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}One increment is three operations}{24}{subsection.10.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Race condition: threads x and y both add to the value $T_q$ in memory, which starts at 0.}}{25}{figure.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Race condition.}{25}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}09\_race\_condition.cu}{25}{subsection.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Fix 1: atomic operations}{26}{section.11}\protected@file@percent }
+\newlabel{sec:atomics}{{11}{26}{Fix 1: atomic operations}{section.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Resource locking: thread y waits until thread x has released the lock on $T_q$. The final result is $S_x + S_y$.}}{26}{figure.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}10\_atomic\_add.cu}{27}{subsection.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Atomic functions}{27}{subsection.11.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Atomic functions.}}{28}{table.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12}Fix 2: reduction}{28}{section.12}\protected@file@percent }
+\newlabel{sec:reduction}{{12}{28}{Fix 2: reduction}{section.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Reduction of 8 values. Round 1: \texttt  {a[0] = 3 + 4}, \texttt  {a[1] = 1 + 1}, \texttt  {a[2] = 7 + 6}, \texttt  {a[3] = 0 + 3}.}}{28}{table.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}11\_reduction.cu}{29}{subsection.12.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}11b\_reduction\_figure.cu}{30}{subsection.12.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Reduction of 16 values, pairing neighbours: stride 1, 2, 4, 8.}}{30}{figure.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}12\_reduction\_blocks.cu}{31}{subsection.12.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13}CPU versus GPU}{32}{section.13}\protected@file@percent }
+\newlabel{sec:timing}{{13}{32}{CPU versus GPU}{section.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.1}13\_timing.cu}{32}{subsection.13.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {14}Locks}{33}{section.14}\protected@file@percent }
+\newlabel{sec:locks}{{14}{33}{Locks}{section.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {14.1}14\_lock.cu}{33}{subsection.14.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {15}Exercise: histogram (sessions 01 + 02)}{34}{section.15}\protected@file@percent }
+\newlabel{sec:histogram}{{15}{34}{Exercise: histogram (sessions 01 + 02)}{section.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {15.1}15\_histogram.cu (solution)}{35}{subsection.15.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {16}Submission: maximum intensity projection}{36}{section.16}\protected@file@percent }
+\newlabel{sec:submission}{{16}{36}{Submission: maximum intensity projection}{section.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Expected result: the MIP of the aneurism volume (256 slices).}}{36}{figure.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {16.1}Data}{36}{subsection.16.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {16.2}How to use volume.h}{37}{subsection.16.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {16.3}Tasks}{38}{subsection.16.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {16.4}Questions}{38}{subsection.16.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {16.5}Report}{38}{subsection.16.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {17}Lexicon}{39}{section.17}\protected@file@percent }
+\newlabel{sec:lexicon}{{17}{39}{Lexicon}{section.17}{}}
+\@writefile{toc}{\contentsline {part}{Cheat sheet}{40}{section*.22}\protected@file@percent }
+\gdef \@abspage@last{40}
