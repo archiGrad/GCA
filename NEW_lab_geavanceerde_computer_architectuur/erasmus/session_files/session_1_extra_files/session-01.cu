@@ -57,9 +57,9 @@ int main(){
 
 // __global__ marks a kernel: it is CALLED from the CPU but RUNS on the GPU.
 // "global" because it is visible to both sides. The only way to run your own code on the GPU is through a kernel. Helpers marked __device__ can then be called from a kernel.
-// void is the RETURN TYPE. __global__ is an "execution space specifier"
+// void is the RETURN TYPE. __global__ is an "execution space specifier".
 __global__ void hello() {
-    // this printf runs on the GPU and is NOT the stdio one. It has the same name and the buffer in GPU memory.
+    // this printf runs on the GPU and is NOT the stdio one. It has the same name, but writes into a buffer in GPU memory that is copied to the terminal at the next synchronization.
     printf("Hello from the GPU\n");
 }
 
@@ -98,7 +98,7 @@ int main() {
 //description: Launch 1 block of 8 threads; each thread prints its own index (threadIdx.x) on a new line.
 
 
-// short version 
+// short version
 #include <cstdio>
 
 __global__ void hello(){
@@ -112,7 +112,7 @@ int main(){
 
 //long version
 
-// even though no printf statement is made, it is best practice to include #include <cstdio> . nvcc still compiles without it, because nvcc automatically includes cuda_runtime.h, which includes stdio.h. 
+// <cstdio> is included for printf. nvcc would still compile without it, because nvcc automatically includes cuda_runtime.h, which includes stdio.h. Including it is best practice.
 #include <cstdio>
 
 __global__ void hello() {
@@ -156,12 +156,12 @@ int main() {
 
 // ================================================================
 
-// 02b_threads_2d.cu  (2D thread block" or "multidimensional thread indexing".)
+// 02b_threads_2d.cu  (2D thread block / multidimensional thread indexing)
 //
 
-//description: Launch 1 block of 4 x 2 threads using dim3; each thread prints its threadIdx.x and threadIdx.y."
+//description: Launch 1 block of 4 x 2 threads using dim3; each thread prints its threadIdx.x and threadIdx.y.
 //short version
- #include <cstdio>
+#include <cstdio>
 
 __global__ void hello(){
 	printf("current threadIdx.x x=%d and threadIdx.y y= %d\n", threadIdx.x, threadIdx.y);
@@ -173,8 +173,6 @@ int main(){
 }
 
 // long version
-//
-//  dim3 is a CUDA built-in vector type (a struct with x, y, z).
 //
 // Why threadIdx.x or threadIdx.y or threadIdx.z... 2D/3D? It is purely a convenience for the programmer, not a hardware feature.
 // The hardware still sees the threads as one long line (x counts fastest, then y, then z)
@@ -188,7 +186,7 @@ int main(){
 #include <cstdio>
 
 __global__ void hello() {
-    //  threadIdx and blockIdx are of type uint3, blockDim and gridDim are of type dim3.]
+    // threadIdx and blockIdx are of type uint3, blockDim and gridDim are of type dim3.
     // Now the block is 2D, so every thread has two indices:
     //   threadIdx.x = column inside the block: 0..3
     //   threadIdx.y = row inside the block:    0..1
@@ -196,14 +194,13 @@ __global__ void hello() {
 }
 
 int main() {
-    // dim3 is a CUDA type with three numbers (x, y, z); missing ones default to 1.
+    // dim3 is a CUDA built-in vector type: a small struct with three numbers (x, y, z); missing ones default to 1.
     // dim3 threads(4, 2) = a block of 4 columns by 2 rows = 8 threads.
     // Writing <<<1, 8>>> is shorthand for dim3(1, 1, 1) blocks and dim3(8, 1, 1) threads.
     // The grid can be 2D in the same way: dim3 blocks(2, 3) gives blockIdx.x and blockIdx.y.
     // 2D is convenient for images and matrices: x = column, y = row.
-    // dim3 is a CUDA TYPE: a small struct with three numbers x, y, z (like int, but with three values).
-    // "threads"is just the name of our variable;
-    // The built-ins are only threadIdx, blockIdx, blockDim and gridDim. There is a 5th built-in: warpSize (= 32). which we cover later.
+    // "threads" is just the name of our variable;
+    // The built-ins are threadIdx, blockIdx, blockDim, gridDim and warpSize (= 32, covered later).
     dim3 threads(4, 2);
     hello<<<1, threads>>>();
     cudaDeviceSynchronize();
@@ -220,47 +217,6 @@ int main() {
 // thread x=3 y=1
 
 
-this is a good ender of practice after flippoing 2d array too
-i feel this example should be more explained. i still dont really understand what you cna do with this.. maybe 2 more  practical psuedocode example of this dim () would be good...    like a more practival example with an image or something liek 2d or 3d  array
-[Two practical examples. They use the global index from 03 and the bounds check from 04.
-
- 1) 2D: invert a grayscale image of W x H pixels.
-    In memory the image is ONE long array, row after row: pixel (x, y) is at index y * W + x.
-
-    __global__ void invert(unsigned char* img, int W, int H) {
-        int x = blockIdx.x * blockDim.x + threadIdx.x;   // column
-        int y = blockIdx.y * blockDim.y + threadIdx.y;   // row
-        if (x < W && y < H) {
-            int i = y * W + x;
-            img[i] = 255 - img[i];
-        }
-    }
-
-    dim3 threads(16, 16);                         // each block = a 16 x 16 tile of pixels
-    dim3 blocks((W + 15) / 16, (H + 15) / 16);    // enough tiles to cover the image, rounded up
-    invert<<<blocks, threads>>>(img, W, H);
-
-    1920 x 1080 image: blocks = (120, 68) -> 1920 x 1088 threads, 1 thread per pixel.
-    The 8 extra rows of threads are stopped by the bounds check.
-    In 1D you would launch W * H threads and compute x = i % W, y = i / W yourself. Same result, less readable.
-
- 2) 3D: threshold a volume (CT scan, voxel grid) of X x Y x Z voxels.
-    Voxel (x, y, z) is at index (z * Y + y) * X + x.
-
-    __global__ void threshold(float* vol, int X, int Y, int Z, float t) {
-        int x = blockIdx.x * blockDim.x + threadIdx.x;
-        int y = blockIdx.y * blockDim.y + threadIdx.y;
-        int z = blockIdx.z * blockDim.z + threadIdx.z;
-        if (x < X && y < Y && z < Z) {
-            int i = (z * Y + y) * X + x;
-            vol[i] = vol[i] > t ? 1.0f : 0.0f;
-        }
-    }
-
-    dim3 threads(8, 8, 8);                                  // each block = an 8 x 8 x 8 cube of voxels (512 threads)
-    dim3 blocks((X + 7) / 8, (Y + 7) / 8, (Z + 7) / 8);
-    threshold<<<blocks, threads>>>(vol, X, Y, Z, 0.5f);
-]
 
 
 
@@ -271,37 +227,33 @@ i feel this example should be more explained. i still dont really understand wha
 //
 //  description: Launch 2 blocks of 4 threads; each thread prints its unique global index.
 
+//short version
+#include <cstdio>
+
+__global__ void hello(){
+	int i = blockIdx.x * blockDim.x + threadIdx.x;
+	printf("individual global index = %d\n", i);
+}
+
+int main(){
+	hello<<<2, 4>>>();
+	cudaDeviceSynchronize();
+}
+
+//long version
 #include <cstdio>
 
 __global__ void hello() {
-    // besides threadIdx , there are lso built-in variables:
-    // blockIdx.x = index of this block in the grid: 0..1 here    <-- also struct?
-    // blockDim.x = threads per block, i.e. the 2nd launch number: 4 here   <-also struct?
-    // gridDim.x  = number of blocks, i.e. the 1st launch number: 2 here  <-- also struct?
-    // [Yes, all three. blockIdx is a uint3, blockDim and gridDim are dim3: structs with .x .y .z, same as threadIdx.]
-    // [typo: "lso" -> "also"]
+    // besides threadIdx, there are also built-in variables (all structs with .x .y .z:
+    // blockIdx is a uint3, blockDim and gridDim are dim3):
+    // blockIdx.x = index of this block in the grid: 0..1 here
+    // blockDim.x = threads per block, i.e. the 2nd launch number: 4 here
+    // gridDim.x  = number of blocks, i.e. the 1st launch number: 2 here
     //
     // to get a unique global index: block 1, thread 2 -> 1*4+2 = 6.
     // global index = blockIdx.x * blockDim.x + threadIdx.x
     //
-    //exampple matrix where we do blockidx * threadixx  to see that this is not good enough, w
-    //
-    //0x0 = 0
-    //0x1 = ...
-    //0x2
-    //0x3
-    //1x0
-    //1x1
-    //1x2
-    //1x3
-    //1x4
-    //
-    //but if you blockix x * blockdimx + threadidx ,      ytou cna put this next to the other example  not below
-    // 0x4=0
-    //...
-    // 1*4+4 = 7
-    //
-    // [Side-by-side version of your draft above. Your draft had "1x4" and "1*4+4": those don't exist, threadIdx.x only goes 0..3.
+    // Why not blockIdx.x * threadIdx.x?
     //
     //  block  thread | wrong: blockIdx.x * threadIdx.x | right: blockIdx.x * blockDim.x + threadIdx.x
     //    0      0    |   0 * 0 = 0                     |   0 * 4 + 0 = 0
@@ -314,10 +266,9 @@ __global__ void hello() {
     //    1      3    |   1 * 3 = 3                     |   1 * 4 + 3 = 7
     //
     //  wrong: 0 appears 5 times and 4..7 never: threads overwrite each other's element, half the array is never touched.
-    //  right: every thread gets a different index, 0..7, no gaps.]
+    //  right: every thread gets a different index, 0..7, no gaps.
     //
-    int i = blockIdx.x * blockDim.x + threadIdx.x;      <-- fixed these
-    // [Correct.]
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
     printf("global index %d\n", i);
 }
 
@@ -327,7 +278,6 @@ int main() {
 }
 
 // Output (block 1 may print before block 0; that differs between runs):
-// [fixed output:]
 // global index 0
 // global index 1
 // global index 2
@@ -343,26 +293,6 @@ int main() {
 
 
 
-short version <---
-[MISTAKES (does not compile):
- - "__global__void": needs a space -> __global__ void
- - blockIdx * blockDim + threadIdx: needs .x on all three (they are structs; structs cannot be multiplied)
- - missing ; at the end of that line
- - "%d\n ": the space after \n puts a space at the start of the next line; remove it
- - #include <cstdio> missing (compiles with nvcc anyway)]
-
-__global__void hello(){
-	int i = blockIdx * blockDim + threadIdx
-	printf( "individual global index = %d\n ",i );
-}
-
-
-int main(){
-	hello<<<2, 4>>>();
-	cudaDeviceSynchronize();
-}
-
-
 // ================================================================
 
 // 04_memory.cu
@@ -373,7 +303,6 @@ int main(){
 
 #include <cstdio>
 #define N 8
-
 
 __global__ void fill(int* a){
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -386,6 +315,7 @@ int main(){
 	fill<<<2,4>>>(a);
 	cudaDeviceSynchronize();
 	for(int i = 0; i < N; i++)printf("%d ", a[i]);
+	printf("\n");
 	cudaFree(a);
 }
 
@@ -412,25 +342,37 @@ int main(){
 // This kernel FILLS the existing array: it writes the values 0..7 into it.
 //
 // This replaces the CPU loop "for (i = 0; i < N; i++) a[i] = i;" — the threads ARE the loop.
-// int* = "pointer to int": a holds a memory ADDRESS, not a number. The kernel needs that address to write into  the array that main() allocated. Kernel arguments are copied, but a copied address still points to the same  memory, so the writes are visible in main(). A plain "int a" would only be a copy of one number.
-__global__ void fill(int* a) { 
-    int i = blockIdx.x * blockDim.x + threadIdx.x;  <-- why is there here no asterix?
+// int* = "pointer to int": a holds a memory ADDRESS, not a number. The kernel needs that address to write into the array that main() allocated. Kernel arguments are copied, but a copied address still points to the same memory, so the writes are visible in main(). A plain "int a" would only be a copy of one number.
+__global__ void fill(int* a) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
     // No bounds check needed HERE because N = 8 and we launch exactly 2 * 4 = 8 threads:
     a[i] = i;
 }
-
 int main() {
     // a is a pointer: a variable that holds a memory address (the start of an int array).
     // It does not point anywhere yet.
     int* a;
 
-    // Allocate N * sizeof(int) = 8 * 4 = 32 bytes of unified memory,  C++ itself does not guarantee 4 bytes, which is why you write sizeof(int) instead of 4.
-    // reachable by both the CPU and the GPU.
-    // &a is the address of the pointer itself, so the function can write the new address into a.  and is the & symbol refering to adress.
-    // [Yes. & in front of a variable = "address of". a is an int*, so &a is an int** (address of the pointer).
-    //  cudaMallocManaged needs it to change a itself.
+    // Allocate N * sizeof(int) = 8 * 4 = 32 bytes of unified memory, reachable by both the CPU and the GPU.
+    // C++ itself does not guarantee that an int is 4 bytes, which is why you write sizeof(int) instead of 4.
+    // & in front of a variable = "address of". a is an int*, so &a is an int** (the address of the pointer itself).
+    // cudaMallocManaged has to CHANGE a: it writes the address of the new 32-byte block into it.
+    // To change a variable, a function needs that variable's address, so we pass &a, not a.
     cudaMallocManaged(&a, N * sizeof(int));
 
+    // Where is the "int array"? There is no array variable, only:
+    //   1. a block of 32 raw bytes, reserved by cudaMallocManaged (bytes have no type)
+    //   2. a pointer a that holds the start address of that block
+    // The type int* is what makes it an int array: it tells the compiler "at this address are ints of 4 bytes".
+    // a[i] is shorthand for *(a + i): start at address a, move i * 4 bytes further, read/write the int there.
+    //   a[0] -> byte 0,  a[1] -> byte 4,  a[2] -> byte 8,  ...  a[7] -> byte 28
+    // Compare: int b[8]; is a "real" array, but it lives on the CPU stack and the GPU cannot reach it.
+    // Memory allocated at runtime (malloc, new, cudaMallocManaged) always comes back as a pointer to its start.
+
+    // a now holds the address of the 32-byte block. We pass a copy of that address to the kernel.
+    // The kernel's int* a points to the same memory, so whatever the GPU writes there, main() sees too.
+    // No & here: fill does not change a itself, only the memory a points to.
+    // No * here: *a would be the value of the first element (an int), not the address of the array.
     fill<<<2, 4>>>(a);
 
     // The CPU waits until the kernel is done. Only then is it safe to read a on the CPU.
@@ -438,6 +380,9 @@ int main() {
 
     for (int i = 0; i < N; i++) printf("%d ", a[i]);
     printf("\n");
+
+    // Optional: a (where the array is) and &a (where the variable a itself is) print different addresses:
+    // printf("a = %p, &a = %p\n", (void*)a, (void*)&a);
 
     // Release the memory from cudaMallocManaged (the CUDA equivalent of free()).
     cudaFree(a);
@@ -452,36 +397,82 @@ int main() {
 // Figure: Which part of the program runs on the CPU and which on the GPU.  (figures/session_1_figures/slide-08.pdf)
 
 
+
+
 // ================================================================
+
 
 // 05_bounds.cu
 //
-//
-// do the same exercise but amount of memory we need to make free is not equal to blocks times threads. is this correct?
+// Description: same exercise as 04, but the number of threads does not equal the number of array elements.
+// Fill an array of N = 1000 ints (4000 bytes) on the GPU so that a[i] = i, then print it on the CPU.
+// Use 256 threads per block.
+// Threads must not write outside the array.
+
+//short version
+#include <cstdio>
+
+#define N 1000
+
+__global__ void fill(int* a, int n){
+	int i = blockIdx.x * blockDim.x + threadIdx.x;
+	if(i < n) a[i] = i;
+}
+
+int main(){
+	int* a;
+	cudaMallocManaged(&a, N * sizeof(int));
+	int threads = 256;
+	int blocks = (N + threads - 1) / threads;
+	fill<<<blocks, threads>>>(a, N);
+	cudaDeviceSynchronize();
+	for(int i = 0; i < N; i++) printf("%d ", a[i]);
+	printf("\n");
+	cudaFree(a);
+}
+
+
+//long version
+
 
 #include <cstdio>
 
-#define N 10
+#define N 1000
 
 __global__ void fill(int* a, int n) {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
-    // We launch 3 blocks * 4 threads = 12 threads, but the array has only 10 elements.
-    // Threads 10 and 11 must do nothing, otherwise they write outside the array.
+    // Threads must not write outside the array:
+    // 4 blocks * 256 = 1024 threads, but only 1000 elements. Threads 1000..1023 would write past the
+    // 4000 allocated bytes. That can corrupt other data, crash, or silently look correct.
+    // The bounds check if (i < n) makes those extra threads skip the write.
     if (i < n) a[i] = i;
-    
 }
-
 int main() {
     int* a;
     cudaMallocManaged(&a, N * sizeof(int));
 
-    int threads = 4;
-    // Integer division rounds DOWN: 10 / 4 = 2 blocks = 8 threads, which is too few.
-    // Adding (threads - 1) makes it round UP: (10 + 3) / 4 = 3 blocks = 12 threads.
+    int threads = 256;
+    // Integer division rounds DOWN: 1000 / 256 = 3 blocks = 768 threads, which is too few.
+    // Adding (threads - 1) makes it round UP: (1000 + 255) / 256 = 4 blocks = 1024 threads.
     int blocks = (N + threads - 1) / threads;
+    //  It is the standard integer "ceil": ceil(N / threads) without floats.
+    //  Integer division drops everything after the decimal point. Adding threads - 1 (255) pushes any
+    //  remainder over the next multiple of 256, but never pushes an exact multiple over:
+    //    N = 1000: (1000 + 255) / 256 = 1255 / 256 = 4.90 -> 4   (remainder, so 1 block extra)
+    //    N = 1024: (1024 + 255) / 256 = 1279 / 256 = 4.99 -> 4   (exact multiple, no extra block)
+    //    N = 1025: (1025 + 255) / 256 = 1280 / 256 = 5.00 -> 5   (1 element left over, 1 block extra)
 
-    // N is the #define above (10). We pass it to the kernel as parameter n,
-    // because the kernel needs the array length for its bounds check.
+    // N is the #define above (1000). We pass it to the kernel as parameter n, because the kernel needs the array length for its bounds check.
+    // Here the kernel could also use N directly: a #define is not a variable and has no scope; the preprocessor
+    // replaces every N with 1000 before compiling. But in real code the length is usually only known at runtime
+    // (e.g. read from a file or user input), so it must be passed as a parameter.
+    //
+    // Why not 1000 blocks of 1 thread? It works, but every block takes at least one warp of 32 threads,
+    // so 31 of 32 lanes sit idle, and each SM can only hold a limited number of blocks at once.
+    //
+    // Why 256 threads? Rule of thumb: a multiple of 32 (the warp size), usually 128 or 256, max 1024.
+    // We need one thread per ELEMENT (1000 ints), not per byte (4000 bytes).
+    //  a block can have fewer than 32 threads (e.g. <<<1, 8>>>), but the hardware always runs whole warps of 32: the unused lanes are switched off and wasted. That's why block sizes are a multiple of 32.
     fill<<<blocks, threads>>>(a, N);
     cudaDeviceSynchronize();
 
@@ -491,42 +482,61 @@ int main() {
     cudaFree(a);
 }
 
-// Output (threads 10 and 11 exist but write nothing):
-// 0 1 2 3 4 5 6 7 8 9
+// Output (threads 1000 to 1023 exist but write nothing):
+// 0 1 2 3 ... 998 999
+
+
 
 // ================================================================
 
-// 06_flip.cu
 
-// The plan: the CPU makes two arrays and fills "in" with 0 1 2 ... 8.
-// The GPU copies every element of "in" to its mirrored position in "out".
-// The CPU then prints both arrays and checks the result.
+
+// 06_flip.cu
+//
+// Description: flip an array on the GPU. Fill an array "in" of N = 9 ints with 0 1 2 ... 8 on the CPU.
+// Each GPU thread copies one element of "in" to its mirrored position in a second array "out",
+// so that out[N - 1 - i] = in[i]. Print both arrays on the CPU and verify the result.
+// Use 4 threads per block. Threads must not read or write outside the arrays.
+
+//short version
+#include <cstdio>
+#define N 9
+
+__global__ void flip(const int* in, int* out, int n){
+	int i = blockIdx.x * blockDim.x + threadIdx.x;
+	if(i < n) out[n - 1 - i] = in[i];
+}
+
+int main(){
+	int *in, *out;
+	cudaMallocManaged(&in, N * sizeof(int));
+	cudaMallocManaged(&out, N * sizeof(int));
+	for(int i = 0; i < N; i++) in[i] = i;
+	int threads = 4;
+	int blocks = (N + threads - 1) / threads;
+	flip<<<blocks, threads>>>(in, out, N);
+	cudaDeviceSynchronize();
+	for(int i = 0; i < N; i++){
+		if(out[i] == N - 1 - i) printf("in %d and out %d\n", in[i], out[i]);
+		else printf("invalid at %d\n", i);
+	}
+	cudaFree(in);
+	cudaFree(out);
+}
+
+
+//long version
 //
 // Steps in main():
 //   1. Reserve two arrays of 9 ints: in and out.
 //   2. Fill in on the CPU with 0 ... 8.
 //   3. Choose the launch: 4 threads per block, (9 + 3) / 4 = 3 blocks = 12 threads.
+//      4 is only to keep the example and its output small; real code uses a multiple of 32 (see 05).
 //   4. Launch flip: threads 0..8 each move one element; threads 9..11 are stopped by the bounds check.
 //   5. Wait for the GPU.
-//   6. Print in and out on the CPU.
-//   7. Verify: in[i] was i, so out[i] must be N - 1 - i.
-//   8. Free both arrays.
-//
-// About step 3 — warps:
-//   The GPU never runs a single thread on its own. It runs threads in groups of 32, called a warp.
-//   All 32 threads of a warp execute the same instruction at the same time.
-//   Every block is cut into warps:
-//     block of 4 threads   -> 1 warp, of which only 4 lanes work and 28 sit idle
-//     block of 256 threads -> 8 full warps, nothing wasted
-//   So in real code the block size is a multiple of 32 (typically 256).
-//   Here we use 4 only to keep the example and its output small.
-//
-//   Real code example, for one million elements:
-//     #define N 1000000
-//     int threads = 256;
-//     int blocks = (N + threads - 1) / threads;   -> 3907 blocks
-//   3907 * 256 = 1,000,192 threads; the last 192 are stopped by the bounds check.
-//   (With N that large you would not print the arrays; the verification loop does the checking.)
+//   6. Print and verify in one loop: in[i] was i, so out[i] must be N - 1 - i.
+//      With a large N you would only print the errors, not every element.
+//   7. Free both arrays.
 //
 // Why two arrays: every thread reads from one array and writes to another, so no thread can
 // overwrite a value that another thread still needs. The order in which threads run does not matter.
@@ -553,40 +563,47 @@ int main() {
     // and this loop fills it on the CPU with 0 1 2 ... 8.
     for (int i = 0; i < N; i++) in[i] = i;
 
-    int threads = 4;    
+    int threads = 4;
     int blocks = (N + threads - 1) / threads; //3
     flip<<<blocks, threads>>>(in, out, N);
     cudaDeviceSynchronize();
 
-    printf("in:  ");
-    for (int i = 0; i < N; i++) printf("%d ", in[i]);
-    printf("\nout: ");
-    for (int i = 0; i < N; i++) printf("%d ", out[i]);
-    printf("\n");
-
-    // check
+    // Print and check in one loop. in[i] was i, so out[i] must be N - 1 - i
+    // (the same test as out[N - 1 - i] == i).
     for (int i = 0; i < N; i++) {
-        if (out[i] != N - 1 - i) {
-            printf("error at %d\n", i);
-            return 1;
-        }
+        if (out[i] == N - 1 - i) printf("in %d and out %d\n", in[i], out[i]);
+        else printf("invalid at %d\n", i);
     }
-    printf("correct\n");
 
     cudaFree(in);
     cudaFree(out);
 }
 
 // Output:
-// in:  0 1 2 3 4 5 6 7 8
-// out: 8 7 6 5 4 3 2 1 0
-// correct
+// in 0 and out 8
+// in 1 and out 7
+// in 2 and out 6
+// in 3 and out 5
+// in 4 and out 4
+// in 5 and out 3
+// in 6 and out 2
+// in 7 and out 1
+// in 8 and out 0
+
 
 // Figure: First session's exercise: flip an array.  (figures/session_1_figures/slide-23.pdf)
+
 
 // ================================================================
 
 // 07_flip_inplace.cu
+//
+// Description: same flip as 06, but in place. Use ONE array "a" of N = 9 ints, filled with 0 1 2 ... 8 on the CPU,
+// and flip it on the GPU so that it ends as 8 7 6 5 4 3 2 1 0. Print the array on the CPU.
+// Use 4 threads per block.
+// Avoid a race condition: no element may be written by one thread while another thread reads or writes it.
+
+
 
 // In-place is an alternative with one advantage and some drawbacks:
 //   + Uses ONE array instead of two: half the memory.
@@ -662,6 +679,51 @@ int main() {
 
 // ================================================================
 
+
+// Self-study: practical dim3 examples (2D image, 3D volume).
+// Good follow-up practice after 08_flip_2d.
+// They use the global index from 03 and the bounds check from 05.
+//
+//  1) 2D: invert a grayscale image of W x H pixels.
+//     In memory the image is ONE long array, row after row: pixel (x, y) is at index y * W + x.
+//
+//     __global__ void invert(unsigned char* img, int W, int H) {
+//         int x = blockIdx.x * blockDim.x + threadIdx.x;   // column
+//         int y = blockIdx.y * blockDim.y + threadIdx.y;   // row
+//         if (x < W && y < H) {
+//             int i = y * W + x;
+//             img[i] = 255 - img[i];
+//         }
+//     }
+//
+//     dim3 threads(16, 16);                         // each block = a 16 x 16 tile of pixels
+//     dim3 blocks((W + 15) / 16, (H + 15) / 16);    // enough tiles to cover the image, rounded up
+//     invert<<<blocks, threads>>>(img, W, H);
+//
+//     1920 x 1080 image: blocks = (120, 68) -> 1920 x 1088 threads, 1 thread per pixel.
+//     The 8 extra rows of threads are stopped by the bounds check.
+//     In 1D you would launch W * H threads and compute x = i % W, y = i / W yourself. Same result, less readable.
+//
+//  2) 3D: threshold a volume (CT scan, voxel grid) of X x Y x Z voxels.
+//     Voxel (x, y, z) is at index (z * Y + y) * X + x.
+//
+//     __global__ void threshold(float* vol, int X, int Y, int Z, float t) {
+//         int x = blockIdx.x * blockDim.x + threadIdx.x;
+//         int y = blockIdx.y * blockDim.y + threadIdx.y;
+//         int z = blockIdx.z * blockDim.z + threadIdx.z;
+//         if (x < X && y < Y && z < Z) {
+//             int i = (z * Y + y) * X + x;
+//             vol[i] = vol[i] > t ? 1.0f : 0.0f;
+//         }
+//     }
+//
+//     dim3 threads(8, 8, 8);                                  // each block = an 8 x 8 x 8 cube of voxels (512 threads)
+//     dim3 blocks((X + 7) / 8, (Y + 7) / 8, (Z + 7) / 8);
+//     threshold<<<blocks, threads>>>(vol, X, Y, Z, 0.5f);
+
+// ================================================================
+//
+//
 // Expected for next week
 //
 // A LaTeX-created PDF document with a solution for exercise 08_flip_2d.cu.
@@ -679,3 +741,82 @@ int main() {
 // - Convert (x, y) to a position in memory.
 // - Bounds check in BOTH directions.
 // - Verify the result on the CPU.
+//
+//
+//
+//
+//
+//
+//
+// lexicon
+// // ================================================================
+// Lexicon
+// ================================================================
+//
+// --- Program structure ---
+// .cu file                  Source file with CUDA code, compiled with nvcc.
+// nvcc                      NVIDIA's CUDA compiler. Splits the code into CPU and GPU parts.
+// host / device             CUDA's names for the CPU and the GPU (used throughout the Programming Guide).
+// kernel                    A function that runs on the GPU, launched from the CPU. Marked __global__, returns void.
+// __global__                Marks a kernel: called from the CPU, runs on the GPU.
+// __device__                Marks a helper function that runs on the GPU and can only be called from GPU code.
+// execution space specifier Keyword that says where a function runs (__global__, __device__, __host__).
+// return type               The type a function gives back (void = nothing). main must return int.
+// scope                     The region where a name is visible, e.g. a variable inside { } only exists there.
+// #define / preprocessor    Text replacement before compiling: every N becomes 1000. Not a variable, no scope.
+//
+// --- Launching ---
+// launch configuration      <<<blocks, threads per block>>>: how many threads run the kernel.
+// asynchronous              The CPU does not wait after a kernel launch; it continues immediately.
+// cudaDeviceSynchronize()   Makes the CPU wait until the GPU has finished. Also flushes GPU printf output.
+// device printf             The GPU's printf: writes into a buffer in GPU memory, printed at the next sync.
+//
+// --- Thread hierarchy ---
+// thread                    One instance of the kernel. Every thread runs the whole kernel body once.
+// block (thread block)      A group of threads (max 1024). Threads in a block run on the same SM.
+// grid                      All blocks of one kernel launch.
+// threadIdx                 Index of the thread inside its block (.x .y .z). Type uint3.
+// blockIdx                  Index of the block inside the grid (.x .y .z). Type uint3.
+// blockDim                  Number of threads per block (.x .y .z). Type dim3.
+// gridDim                   Number of blocks in the grid (.x .y .z). Type dim3.
+// warpSize                  Built-in: number of threads in a warp (32).
+// global index              Unique number per thread over the whole grid: blockIdx.x * blockDim.x + threadIdx.x.
+//
+// --- Hardware ---
+// warp                      Group of 32 threads that the hardware always runs together.
+// lane                      One of the 32 slots in a warp. Unused lanes are switched off and wasted.
+// SIMT                      Single Instruction, Multiple Threads: all threads of a warp execute the same instruction at once.
+// SM                        Streaming Multiprocessor: a processing unit of the GPU. Blocks are scheduled onto SMs.
+// occupancy                 How many threads/blocks are active on an SM at the same time. Depends on block size,
+//                           registers and shared memory.
+// register                  Fastest memory, private to one thread. Local variables (like tmp) live here.
+//
+// --- Types ---
+// struct                    A type that groups several fields, e.g. x, y, z.
+// dim3                      CUDA built-in vector type: struct with x, y, z. Missing values default to 1.
+// uint3                     CUDA built-in vector type: struct with three unsigned ints. Type of threadIdx and blockIdx.
+// sizeof(type)              Number of bytes of a type. sizeof(int) = 4 on all CUDA platforms.
+// const                     Promise not to change something. const int* in = the kernel only reads in.
+//
+// --- Memory and pointers ---
+// address                   A number that says where something is in memory.
+// pointer (int*)            A variable that holds an address. int* = "address of an int".
+// & (address-of)            &a = the address of variable a.
+// * (dereference)           *a = the value at the address in a.
+// int**                     Pointer to a pointer, e.g. &a when a is an int*.
+// a[i]                      Shorthand for *(a + i): start at a, move i elements further.
+// stack                     CPU memory for normal local variables (int b[8];). The GPU cannot reach it.
+// unified memory            Memory that both CPU and GPU can access through the same pointer.
+// cudaMallocManaged()       Allocates unified memory and writes its address into your pointer.
+// cudaFree()                Releases memory from cudaMallocManaged (like free()).
+// row-major                 2D data stored row after row in one array: element (x, y) is at y * W + x.
+//
+// --- Correctness ---
+// bounds check              if (i < n): stops extra threads from accessing memory outside the array.
+// integer division          Division of ints drops the decimals: 1000 / 256 = 3.
+// ceil division             (N + threads - 1) / threads: integer division that rounds up.
+// in-place                  Modifying the input array itself instead of writing to a second array.
+// race condition            Several threads access the same memory, at least one writes, and the order is not
+//                           controlled. The result depends on timing.
+// atomic operation          A read-modify-write that cannot be interrupted by other threads (session 2).
+// synchronization           Making threads wait for each other at a certain point (session 2).

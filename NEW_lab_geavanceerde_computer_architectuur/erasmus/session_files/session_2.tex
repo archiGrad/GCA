@@ -1,235 +1,279 @@
-% kuleuventheme2 by Janez Kren, September 2017, janez.kren@kuleuven.be, based on:
-% kuleuventheme 1.3 by Roland Pastorino, 2013 roland.pastorino@kuleuven.be / www.rolandpastorino.com
-
-\PassOptionsToPackage{usenames, table, dvipsnames}{xcolor} % 
-\documentclass[11pt,t]{beamer}
-\usetheme{kuleuven2}	%THEME OPTIONS for LOGO: kul (default), kulak, lrd,    ; OPTIONS for TITLE PAGE: normal (default), sedes
-
-
-%%% OTHER SETTINGS
-\usefonttheme[onlymath]{serif}			% math font with serifs, delete to make it sans-serif
-\setbeamertemplate{footline}[body] 		% delete this line to remove footline bar on all frames
-%\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter} %enable for widescreen 16:9 ratio
-%\titlegraphic{ \includegraphics[width=.2\paperwidth]{mytitlepagepic.png} } %optional title page image
-
-
-%%% ADDED BY ALEX (start)
-\usepackage[english]{babel}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-
-\usepackage{pythonhighlight}
-
-\usepackage[orientation=landscape,size=custom, width=16,height=9,scale=0.5,debug]{beamerposter} 
-
-\definecolor{mygray}{rgb}{0.8,0.8,0.8}
-\newcommand{\inline}[1]{ \colorbox{mygray}{\lstinline{#1}}}
-
-\usepackage{xcolor}
-
-\usepackage{layouts} % To get text/page width
-
-\usepackage{listings}
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-% \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-\definecolor{backcolour}{rgb}{0.93,0.93,0.95}
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
-}
-\lstset{style=mystyle}
-
-%%% ADDED BY ALEX (stop)
-
-
-%%% TITLE PAGE INFO:
-\title[Geavanceerde Computerarchitectuur 2$^{\text{nd}}$ session]{Geavanceerde Computerarchitectuur 2$^{\text{nd}}$ session} %[]] will appear in footline
-\subtitle{Race conditions}
-
-\author{Joris Putteneers, {\footnotesize joris.putteneers@kuleuven.be}}
-\institute{DRAMCO}
-\date{}
-
-
-
-
+\documentclass[main.tex]{subfiles}
 \begin{document}
-\csname beamer@calculateheadfoot\endcsname %recalculate head and foot dimension
+\session{02}{19-11-2026}
 
-
- %%
- %%  0. TITLE PAGE and TABLE OF CONTENT
- %%
-% Title page
-\begin{frame}[plain,noframenumbering]
-	\titlepage
-\end{frame}
-	
-
-% Table of Contents
-\begin{frame}{Outline}
-	\hfill	{\large \parbox{.961\textwidth}{\tableofcontents[hideothersubsections]}}
-\end{frame}
-
-
-
-
-
-
-
-\section{Race conditions}
-
-
-\begin{frame}{Race conditions} 
-    \vspace{-2mm}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.84\linewidth]{figure/session-2/race.jpg}
-    \end{figure}
-\end{frame}
-
-
-\begin{frame}{Addition - an example of possible race conditions}
-    \vspace{5mm}
-    \begin{figure}
-        \centering
-        \input{figure/session-2/addition}
-    \end{figure}
-\end{frame}
-
-
-\begin{frame}{Resource locking and waiting as an alternative}
-    \vspace{-2mm} 
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.90\linewidth]{figure/session-2/atomic.jpg}
-    \end{figure}
-\end{frame}
-
-
-\begin{frame}{Atomic operation} 
-
-    An atomic command gets executed without interruption
-    
-    \vspace{2mm}
-    
-    Threads get \textbf{sequential access} to a common resource
-    
-    \vspace{6mm}
-    
-    \uncover<2->{
-    CUDA (and other interfaces) features built-in atomic functions:
-    
-    \vspace{2mm}
-    
-    \begin{itemize}\setlength\itemsep{0.5em}
-        \item For addition \inline{atomicAdd(...)}
-        \item For subtraction \inline{atomicSub(...)}
-        \item For minimum detection \inline{atomicMin(...)}
-        \item For maximum detection \inline{atomicMax(...)}
-        \item ... full list and reference on p. 187--190 of the programming guide
-    \end{itemize}
-    }
-
-\end{frame}
-
-
-\begin{frame}{Semi-parallel addition using reduction} 
-
-    \begin{columns}[t]
-    \begin{column}{.5\textwidth}
-        \begin{figure}
-            \centering
-            \includegraphics[width=0.9\columnwidth]{figure/session-2/reduction.png}
-        \end{figure}
-    \end{column}
-    \begin{column}{.52\textwidth}
-    {\small
-    \begin{itemize}\setlength\itemsep{1em}
-        \uncover<2->{\item Ideal for $2^N$ long inputs}
-        \uncover<3->{\item Complexity $\mathcal{O}(\log_2(N))$}
-        \uncover<4->{\item Synchronize threads on each reduction step to avoid race conditions (see p. 173)}
-        \uncover<5->{\item Shifting direction not important}
-    \end{itemize}
-    }
-    \end{column}
-    \end{columns}
-
-\end{frame}
-
-
-\section{Exercise}
-
-\begin{frame}{Max detection using three approaches} 
-
-    Implement max detection using:
-    \vspace{1mm}
-    \begin{itemize}\setlength\itemsep{0.75em}
-        \item A for loop on the CPU,
-        \item A GPU kernel employing atomic operation, and
-        \item A GPU kernel using reduction.
-    \end{itemize}
-    
-    \vspace{3mm}
-    
-    Use a 1D input array of your liking.
-    
-    \vspace{3mm}
-    
-    Assess the dependency of the execution time on the input array's length.
-    
-    \vspace{3mm}
-
-    \textit{Timing examples are provided in the cheat sheet.}
-
-\end{frame}
-
-\begin{frame}{Tips}
-Start simple, only consider 1 block!
-
-\vspace{2mm}
-
-Many ways to accomplish the same goal
-
-\vspace{2mm}
-
-Some ways might use shared memory (more in lab 4)
-
-\begin{itemize}\setlength\itemsep{1em}
-    \item Memory is shared per block (all threads in block can access it)
-    \item \inline{extern __shared__ int sdata[];}
-    \item Calling a kernel with shared memory \inline{foo<<<nr_blocks, nr_threads, size_shared_memory>>>}
+New in this session:
+\begin{itemize}[nosep]
+  \item race conditions
+  \item \texttt{atomicAdd}, \texttt{atomicSub}, \texttt{atomicMin}, \texttt{atomicMax}
+  \item \texttt{\_\_syncthreads()}
+  \item \texttt{\_\_shared\_\_} memory
+  \item timing with CUDA events
+  \item locks
 \end{itemize}
 
-\end{frame}
+The solution of the session 01 exercise (2D flip) and the extra memory, synchronization and timing examples are in ``session 01 extended''.
 
+%=====================================================================
+\section{Reading}
 
-\begin{frame}{Guiding questions} 
+CUDA Programming Guide:
+\begin{itemize}[nosep]
+  \item Atomic functions:\\
+    \url{https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/cpp-language-extensions.html#atomicadd}
+  \item \texttt{cuda::atomic\_ref} (libcu++):\\
+    \url{https://nvidia.github.io/cccl/libcudacxx/extended_api/synchronization_primitives/atomic_ref.html}
+  \item Warps and SIMT, Unified Memory (already read in session 01):\\
+    \url{https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html}
+\end{itemize}
 
-    \begin{itemize}\setlength\itemsep{1em}
-        \item \textbf{Is the result correct?}
-        \item \textbf{How does time increase as a function of input size?}
-        \item What happens if the input is larger than 2048 (how would you ensure correct calculation and are there additional synchronization steps)?
-        \item Consider calling the kernel with much less threads than there are data elements. For example, one tenth. How would you ensure all elements get processed?
-        \item How would you tackle a 2D array?
-    \end{itemize}
+Background material: \url{https://wlandau.github.io/gpu/}
 
-\end{frame}
+%=====================================================================
+\section{Race conditions}
+\label{sec:race}
+
+Many threads often have to combine their results into one value: a sum, a maximum, a count.
+If they all update the same memory location, updates get lost.
+
+\subsection{One increment is three operations}
+
+Let \texttt{int *x} point to an integer in global memory. \texttt{(*x)++} is executed in three steps:
+\begin{enumerate}[nosep]
+  \item read the value at \texttt{*x} into a register;
+  \item add 1 to the value in the register;
+  \item write the result back to \texttt{*x}.
+\end{enumerate}
+
+The addition happens in the GPU core (SM), not in memory: the value sits in a register and an integer unit (ALU) adds 1.
+Memory can only be read and written, it cannot add. That is why the value travels memory $\rightarrow$ register $\rightarrow$ memory.
+
+Two threads A and B both increment \texttt{*x}, which holds 7. The correct result is 9.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c|l|l|c}
+\multicolumn{4}{c}{correct order} \\
+step & thread A & thread B & \texttt{*x} \\ \hline
+1 & read 7  &         & 7 \\
+2 & $7+1=8$ &         & 7 \\
+3 & write 8 &         & 8 \\
+4 &         & read 8  & 8 \\
+5 &         & $8+1=9$ & 8 \\
+6 &         & write 9 & 9 \\
+\end{tabular}
+\qquad
+\begin{tabular}{c|l|l|c}
+\multicolumn{4}{c}{race condition} \\
+step & thread A & thread B & \texttt{*x} \\ \hline
+1 & read 7  &         & 7 \\
+2 &         & read 7  & 7 \\
+3 & $7+1=8$ &         & 7 \\
+4 & write 8 &         & 8 \\
+5 &         & $7+1=8$ & 8 \\
+6 &         & write 8 & 8 \\
+\end{tabular}
+\caption{Two parallel increments of the same integer.}
+\end{table}
+
+For a correct result, B may only read after A has written (left).
+In the race (right), B reads after A has read, but before A has written.
+At that moment A's 8 only exists in A's register; memory still holds 7.
+Both threads compute 8 and both write 8: B's write overwrites A's.
+Two increments happened, memory only shows one.
+
+\paragraph{Race condition.}
+A hazard where the result of a program depends on the timing of events that cannot be controlled, such as the execution order of threads.
+It arises when threads do not only work on their own data, but write to a shared location.
+
+Two ways to fix it follow:
+\begin{itemize}[nosep]
+  \item brute force: atomic operations (Section~\ref{sec:atomics}) and locks force the threads to take turns;
+  \item reduction: restructure the computation so that threads no longer write to the same location.
+\end{itemize}
+
+\subsection{09\_race\_condition.cu}
+\paragraph{Short version.}
+\begin{lstlisting}[language=CUDA]
+// description: 1024 threads each add one element of an array (all 1) to the same int total. Print the expected and the obtained sum.
+
+#include <cstdio>
+
+#define N 1024
+
+__global__ void sum(const int* a, int* total, int n){
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i < n) *total += a[i];
+}
+
+int main(){
+    int *a, *total;
+    cudaMallocManaged(&a, N * sizeof(int));
+    cudaMallocManaged(&total, sizeof(int));
+
+    for (int i = 0; i < N; i++) a[i] = 1;
+    *total = 0;
+
+    int threads = 256;
+    int blocks = (N + threads - 1) / threads;
+    sum<<<blocks, threads>>>(a, total, N);
+    cudaDeviceSynchronize();
+
+    printf("expected %d, got %d\n", N, *total);
+
+    cudaFree(a);
+    cudaFree(total);
+}
+\end{lstlisting}
+\paragraph{Long version.}
+\begin{lstlisting}[language=CUDA]
+#include <cstdio>
+
+#define N 1024
+
+// total is a pointer to ONE int (not an array): the shared result. *total means "the int that total points to".
+// Every thread adds its own element to that one int.
+// *total += a[i] is read + add + write. A thread that reads total before another thread has written it computes with an old value, and the writes overwrite each other: increments get lost.
+__global__ void sum(const int* a, int* total, int n) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i < n) *total += a[i];
+}
+
+int main() {
+    int *a, *total;
+    cudaMallocManaged(&a, N * sizeof(int));
+    cudaMallocManaged(&total, sizeof(int));
+
+    // every element is 1, so the correct sum is N
+    for (int i = 0; i < N; i++) a[i] = 1;
+    *total = 0;
+
+    // 4 blocks of 256 threads = 1024 threads, one per element
+    int threads = 256;
+    int blocks = (N + threads - 1) / threads;
+    sum<<<blocks, threads>>>(a, total, N);
+    cudaDeviceSynchronize();
+
+    printf("expected %d, got %d\n", N, *total);
+
+    cudaFree(a);
+    cudaFree(total);
+}
+
+// Output (lower than 1024, and different from run to run):
+// expected 1024, got ...
+//
+// The result depends on the timing of the threads: a race condition.
+// The 32 threads of a warp execute the read together, so they all read the same old value of *total.
+\end{lstlisting}
+
+%=====================================================================
+\section{Fix 1: atomic operations}
+\label{sec:atomics}
+
+An atomic operation does read + modify + write as one indivisible step: no other thread can access the address in between.
+When many threads do an atomic operation on the same address, they are executed one after another.
+The result is always correct, but those threads no longer work in parallel: fine for a few updates, slow for millions.
+
+\subsection{10\_atomic\_add.cu}
+\paragraph{Short version.}
+\begin{lstlisting}[language=CUDA]
+// description: fix 09 with atomicAdd.
+
+#include <cstdio>
+
+#define N 1024
+
+__global__ void sum(const int* a, int* total, int n){
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i < n) atomicAdd(total, a[i]);
+}
+
+int main(){
+    int *a, *total;
+    cudaMallocManaged(&a, N * sizeof(int));
+    cudaMallocManaged(&total, sizeof(int));
+
+    for (int i = 0; i < N; i++) a[i] = 1;
+    *total = 0;
+
+    int threads = 256;
+    int blocks = (N + threads - 1) / threads;
+    sum<<<blocks, threads>>>(a, total, N);
+    cudaDeviceSynchronize();
+
+    printf("expected %d, got %d\n", N, *total);
+
+    cudaFree(a);
+    cudaFree(total);
+}
+\end{lstlisting}
+\paragraph{Long version.}
+\begin{lstlisting}[language=CUDA]
+#include <cstdio>
+
+#define N 1024
+
+// atomicAdd(address, value) does *address += value as ONE indivisible step.
+// For global memory, the read + add + write is executed by atomic units in the L2 cache, not in the thread's registers.
+// Atomics on the same address are executed one after another: the threads get SEQUENTIAL access to total.
+// Result: always correct. Cost: the 1024 additions happen one after another, not in parallel.
+// atomicAdd returns the OLD value at the address (not used here).
+__global__ void sum(const int* a, int* total, int n) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i < n) atomicAdd(total, a[i]);
+}
+
+int main() {
+    int *a, *total;
+    cudaMallocManaged(&a, N * sizeof(int));
+    cudaMallocManaged(&total, sizeof(int));
+
+    for (int i = 0; i < N; i++) a[i] = 1;
+    *total = 0;
+
+    int threads = 256;
+    int blocks = (N + threads - 1) / threads;
+    sum<<<blocks, threads>>>(a, total, N);
+    cudaDeviceSynchronize();
+
+    printf("expected %d, got %d\n", N, *total);
+
+    cudaFree(a);
+    cudaFree(total);
+}
+
+// Output:
+// expected 1024, got 1024
+\end{lstlisting}
+
+\subsection{Atomic functions}
+
+All legacy functions return the old value at the address.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l|l|l}
+legacy & \texttt{cuda::atomic\_ref} & operation \\ \hline
+\texttt{atomicAdd} & \texttt{fetch\_add} & \texttt{*a += v} \\
+\texttt{atomicSub} & \texttt{fetch\_sub} & \texttt{*a -= v} \\
+\texttt{atomicMin} & \texttt{fetch\_min} & \texttt{*a = min(*a, v)} \\
+\texttt{atomicMax} & \texttt{fetch\_max} & \texttt{*a = max(*a, v)} \\
+\texttt{atomicAnd} & \texttt{fetch\_and} & \texttt{*a \&= v} \\
+\texttt{atomicOr} & \texttt{fetch\_or} & \texttt{*a |= v} \\
+\texttt{atomicXor} & \texttt{fetch\_xor} & \texttt{*a \^{}= v} \\
+\texttt{atomicExch} & \texttt{exchange} & \texttt{*a = v} \\
+\texttt{atomicCAS} & \texttt{compare\_exchange\_strong} & \texttt{if (*a == c) *a = v} \\
+\end{tabular}
+\caption{Atomic functions.}
+\end{table}
+
+\begin{itemize}[nosep]
+  \item \texttt{atomicMin} and \texttt{atomicMax}: integers only (\texttt{int}, \texttt{unsigned}, \texttt{long long}, \texttt{unsigned long long}), no \texttt{float}.
+  \item \texttt{atomicSub}: \texttt{int} and \texttt{unsigned} only.
+  \item \texttt{atomicCAS} (compare-and-swap) is the building block for locks.
+  \item The CUDA Programming Guide recommends the libcu++ versions for efficiency, safety and portability:\\
+    \texttt{cuda::atomic\_ref}, header \texttt{<cuda/atomic>}. The examples in this course use the legacy functions.
+\end{itemize}
 
 \end{document}
