@@ -1,8 +1,0 @@
-- keyboard to azerty be:
-setxkbmap be
-
-- change pswd: in admin =>
-sudo passwd student
-
-- switch user to admin for install:
-su - b230admin 

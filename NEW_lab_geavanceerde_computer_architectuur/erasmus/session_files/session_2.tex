@@ -12,8 +12,6 @@ New in this session:
   \item locks
 \end{itemize}
 
-The solution of the session 01 exercise (2D flip) and the extra memory, synchronization and timing examples are in ``session 01 extended''.
-
 %=====================================================================
 \section{Reading}
 
@@ -21,13 +19,7 @@ CUDA Programming Guide:
 \begin{itemize}[nosep]
   \item Atomic functions:\\
     \url{https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/cpp-language-extensions.html#atomicadd}
-  \item \texttt{cuda::atomic\_ref} (libcu++):\\
-    \url{https://nvidia.github.io/cccl/libcudacxx/extended_api/synchronization_primitives/atomic_ref.html}
-  \item Warps and SIMT, Unified Memory (already read in session 01):\\
-    \url{https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html}
 \end{itemize}
-
-Background material: \url{https://wlandau.github.io/gpu/}
 
 %=====================================================================
 \section{Race conditions}
@@ -93,40 +85,9 @@ Two ways to fix it follow:
 \end{itemize}
 
 \subsection{09\_race\_condition.cu}
-\paragraph{Short version.}
 \begin{lstlisting}[language=CUDA]
 // description: 1024 threads each add one element of an array (all 1) to the same int total. Print the expected and the obtained sum.
 
-#include <cstdio>
-
-#define N 1024
-
-__global__ void sum(const int* a, int* total, int n){
-    int i = blockIdx.x * blockDim.x + threadIdx.x;
-    if (i < n) *total += a[i];
-}
-
-int main(){
-    int *a, *total;
-    cudaMallocManaged(&a, N * sizeof(int));
-    cudaMallocManaged(&total, sizeof(int));
-
-    for (int i = 0; i < N; i++) a[i] = 1;
-    *total = 0;
-
-    int threads = 256;
-    int blocks = (N + threads - 1) / threads;
-    sum<<<blocks, threads>>>(a, total, N);
-    cudaDeviceSynchronize();
-
-    printf("expected %d, got %d\n", N, *total);
-
-    cudaFree(a);
-    cudaFree(total);
-}
-\end{lstlisting}
-\paragraph{Long version.}
-\begin{lstlisting}[language=CUDA]
 #include <cstdio>
 
 #define N 1024
@@ -176,40 +137,9 @@ When many threads do an atomic operation on the same address, they are executed 
 The result is always correct, but those threads no longer work in parallel: fine for a few updates, slow for millions.
 
 \subsection{10\_atomic\_add.cu}
-\paragraph{Short version.}
 \begin{lstlisting}[language=CUDA]
 // description: fix 09 with atomicAdd.
 
-#include <cstdio>
-
-#define N 1024
-
-__global__ void sum(const int* a, int* total, int n){
-    int i = blockIdx.x * blockDim.x + threadIdx.x;
-    if (i < n) atomicAdd(total, a[i]);
-}
-
-int main(){
-    int *a, *total;
-    cudaMallocManaged(&a, N * sizeof(int));
-    cudaMallocManaged(&total, sizeof(int));
-
-    for (int i = 0; i < N; i++) a[i] = 1;
-    *total = 0;
-
-    int threads = 256;
-    int blocks = (N + threads - 1) / threads;
-    sum<<<blocks, threads>>>(a, total, N);
-    cudaDeviceSynchronize();
-
-    printf("expected %d, got %d\n", N, *total);
-
-    cudaFree(a);
-    cudaFree(total);
-}
-\end{lstlisting}
-\paragraph{Long version.}
-\begin{lstlisting}[language=CUDA]
 #include <cstdio>
 
 #define N 1024

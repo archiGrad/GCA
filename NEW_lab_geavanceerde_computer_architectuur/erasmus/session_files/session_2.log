@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.1.31)  19 NOV 2026 02:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.1.31)  19 NOV 2026 03:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -578,7 +578,7 @@ File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
 <use figures/KULEUVEN_GENT_RGB_LOGO.png>
 Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
- 78.
+ 80.
 (pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
  [2]
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -591,23 +591,17 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 98.
+(Font)              <5> on input line 89.
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 100.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 91.
 File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
 <use figures/KULEUVEN_GENT_RGB_LOGO.png>
 Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
- 134.
+ 141.
 (pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
  [3]
-File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
-<use figures/KULEUVEN_GENT_RGB_LOGO.png>
-Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
- 202.
-(pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
- [4]
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-218.
+148.
 
 (/usr/share/texmf/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -615,26 +609,26 @@ File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
 <use figures/KULEUVEN_GENT_RGB_LOGO.png>
 Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
- 273.
+ 207.
 (pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
- [5]
+ [4]
 File: figures/KULEUVEN_GENT_RGB_LOGO.png Graphic file (type png)
 <use figures/KULEUVEN_GENT_RGB_LOGO.png>
 Package pdftex.def Info: figures/KULEUVEN_GENT_RGB_LOGO.png  used on input line
- 279.
+ 209.
 (pdftex.def)             Requested size: 56.9055pt x 18.0904pt.
- [6] (./session_2.aux)
+ [5] (./session_2.aux)
 Package rerunfilecheck Info: File `session_2.out' has not changed.
 (rerunfilecheck)             Checksum: 717757C374F29AF044EEE8A730EAABA9;1051.
  ) 
 Here is how much of TeX's memory you used:
- 13621 strings out of 478287
- 213196 string characters out of 5849289
- 1293805 words of memory out of 5000000
+ 13560 strings out of 478287
+ 212332 string characters out of 5849289
+ 1173986 words of memory out of 5000000
  31421 multiletter control sequences out of 15000+600000
  523448 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,15n,129p,283b,2007s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 80i,15n,129p,283b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/d
 vips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/shar
 e/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
@@ -646,10 +640,10 @@ share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/publ
 ic/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/
 texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/
 lmtt12.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb>
-Output written on session_2.pdf (6 pages, 291239 bytes).
+Output written on session_2.pdf (5 pages, 282734 bytes).
 PDF statistics:
- 335 PDF objects out of 1000 (max. 8388607)
- 295 compressed objects within 3 object streams
- 160 named destinations out of 1000 (max. 500000)
+ 254 PDF objects out of 1000 (max. 8388607)
+ 215 compressed objects within 3 object streams
+ 99 named destinations out of 1000 (max. 500000)
  62 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "*.dda": "arm",
-        "chrono": "cpp",
-        "iomanip": "cpp",
-        "ostream": "cpp"
-    }
-}

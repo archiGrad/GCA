@@ -1,3 +1,0 @@
-\babel@toc {english}{}\relax 
-\beamer@sectionintoc {1}{Background}{3}{0}{1}
-\beamer@sectionintoc {2}{Exercise}{23}{0}{2}
